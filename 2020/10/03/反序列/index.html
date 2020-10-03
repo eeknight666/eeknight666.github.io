@@ -162,12 +162,11 @@
 <h4 id="phar原理"><a href="#phar原理" class="headerlink" title="phar原理"></a>phar原理</h4><h5 id="a-stub"><a href="#a-stub" class="headerlink" title="a stub"></a>a stub</h5><p>可以理解为一个标志，格式为<code>xxx&lt;?php xxx;__HALT_COMPILER();?&gt;</code>，前面内容不限，但必须以<code>__HALT_COMPILER();?&gt;</code>来结尾，否则phar扩展将无法识别这个文件为phar文件。</p>
 <p><strong>manifest</strong></p>
 <p>Phar文件中被压缩的文件的一些信息，其中Meta-data部分的信息会以序列化的形式储存，这里就是漏洞利用的关键点</p>
-<p><img src="https://images.seebug.org/content/images/2018/08/24388aaa-6ea4-4856-8fb1-fbf29deb5dca.png-w331s" alt="https://images.seebug.org/content/images/2018/08/24388aaa-6ea4-4856-8fb1-fbf29deb5dca.png-w331s"></p>
+<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDDDDDBDEDCCPDBCOHAGOGH" alt="1.png"></p>
 <p><strong>contents</strong></p>
 <p>被压缩文件的内容。在没特殊要求的情况下，这个被压缩的文件内容可以随便写。</p>
 <p><strong>signature</strong></p>
-<p>签名，放在文件末尾，格式如下：</p>
-<p><img src="https://images.seebug.org/content/images/2018/08/f87194d9-81d6-4786-9339-8a7d4ac596d5.png-w331s" alt="https://images.seebug.org/content/images/2018/08/f87194d9-81d6-4786-9339-8a7d4ac596d5.png-w331s"></p>
+<p>签名，放在文件末尾，格式如下：<img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDDDDDBDEDDCPDCCOHAGOGH" alt="2.png"></p>
 <p><strong>生成一个phar文件</strong></p>
 <p>首先要改一下设置</p>
 <p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDDDCDJDFDCCPDBCOHAGOGH" alt="1.png"></p>
@@ -179,8 +178,7 @@
 <p>这里我用010打开</p>
 <p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDDDCDJDFDDCPDCCOHAGOGH" alt="2.png"></p>
 <p>可以明显的看到meta-data是以序列化的形式存储的。<br> 有序列化数据必然会有反序列化操作，php一大部分的文件系统函数在通过<code>phar://</code>伪协议解析phar文件时，都会将meta-data进行反序列化，测试后受影响的函数如下：</p>
-<p><img src="https://img2020.cnblogs.com/blog/1937992/202006/1937992-20200602120704676-1021025129.png" alt="img"></p>
-<p> <img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDDDCDJDFDICPDDCOHAGOGH" alt="3.png"></p>
+<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDDDDDBDEDECPDDCOHAGOGH" alt="3.png"> <img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDDDCDJDFDICPDDCOHAGOGH" alt="3.png"></p>
 <h4 id="使用前提"><a href="#使用前提" class="headerlink" title="使用前提"></a>使用前提</h4><ol>
 <li>能够上传phar文件到服务器，可将phar文件伪装成其他格式文件绕过上传；</li>
 <li>要有可用的魔术方法作为“跳板”；</li>
