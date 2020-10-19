@@ -1,324 +1,53 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  
-  <meta name="description" content="杂项[TOC]
-N种方法解决打开后下载文件key.exe
-放到010Editor.exe里面可以看到一段文本
-由于前面是image/jpg 和base64加密 就直接去网上解密并弄成图片形式
-网站：https://the-x.cn/base64/（注意要把前面的data:image/jpg;base" />
-  
+{% extends 'includes/layout.swig' %}
 
-  
-  
-  
-  
-  
-  
-  <title>BUUCTF-杂项 | eeknight</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="杂项[TOC] N种方法解决打开后下载文件key.exe 放到010Editor.exe里面可以看到一段文本 由于前面是image&#x2F;jpg 和base64加密 就直接去网上解密并弄成图片形式 网站：https:&#x2F;&#x2F;the-x.cn&#x2F;base64&#x2F;（注意要把前面的data:image&#x2F;jpg;base64,这一段去掉才可以编译）  得到一个二维码 扫完就有flag wireshark 这里要用到wi">
-<meta property="og:type" content="article">
-<meta property="og:title" content="BUUCTF-杂项">
-<meta property="og:url" content="http://example.com/2020/09/13/buuctf-%E6%9D%82%E9%A1%B91/index.html">
-<meta property="og:site_name" content="eeknight">
-<meta property="og:description" content="杂项[TOC] N种方法解决打开后下载文件key.exe 放到010Editor.exe里面可以看到一段文本 由于前面是image&#x2F;jpg 和base64加密 就直接去网上解密并弄成图片形式 网站：https:&#x2F;&#x2F;the-x.cn&#x2F;base64&#x2F;（注意要把前面的data:image&#x2F;jpg;base64,这一段去掉才可以编译）  得到一个二维码 扫完就有flag wireshark 这里要用到wi">
-<meta property="og:locale">
-<meta property="og:image" content="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDEDFCPDCCOHAGOGH">
-<meta property="og:image" content="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDEDGCPDBCOHAGOGH">
-<meta property="og:image" content="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDEDHCPDCCOHAGOGH">
-<meta property="og:image" content="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDEDICPDDCOHAGOGH">
-<meta property="og:image" content="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDEDJCPDECOHAGOGH">
-<meta property="og:image" content="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDFDACPDBCOHAGOGH">
-<meta property="og:image" content="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDFDDCPDCCOHAGOGH">
-<meta property="og:image" content="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDIDHCPDBCOHAGOGH">
-<meta property="og:image" content="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDIDICPDBCOHAGOGH">
-<meta property="og:image" content="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDIDJCPDDCOHAGOGH">
-<meta property="og:image" content="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDJDACPDGCOHAGOGH">
-<meta property="og:image" content="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDJDCCPDGCOHAGOGH">
-<meta property="og:image" content="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDJDECPDHCOHAGOGH">
-<meta property="og:image" content="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDJDGCPDBCOHAGOGH">
-<meta property="og:image" content="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDDDGCPDGCOHAGOGH">
-<meta property="og:image" content="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDDDICPDBCOHAGOGH">
-<meta property="og:image" content="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDEDACPDDCOHAGOGH">
-<meta property="og:image" content="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDDDJCPDCCOHAGOGH">
-<meta property="og:image" content="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDEDCCPDBCOHAGOGH">
-<meta property="og:image" content="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDEDDCPDCCOHAGOGH">
-<meta property="og:image" content="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDEDECPDDCOHAGOGH">
-<meta property="og:image" content="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDEDFCPDECOHAGOGH">
-<meta property="og:image" content="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDEDGCPDBCOHAGOGH">
-<meta property="og:image" content="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDEDICPDCCOHAGOGH">
-<meta property="og:image" content="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDEDHCPDDCOHAGOGH">
-<meta property="article:published_time" content="2020-09-12T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-10-03T08:55:31.756Z">
-<meta property="article:author" content="eeknight">
-<meta property="article:tag" content="练习">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDEDFCPDCCOHAGOGH">
-  
-  
-    <link rel="icon" href="/css/images/favicon.ico">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
-
-  
-  <!-- baidu webmaster push -->
-  <script src='//push.zhanzhang.baidu.com/push.js'></script>
-<meta name="generator" content="Hexo 5.1.1"></head>
-<body class="home blog custom-background custom-font-enabled single-author">
-  <div id="page" class="hfeed site">
-      <header id="masthead" class="site-header" role="banner">
-    <hgroup>
-      <h1 class="site-title">
-        <a href="/" title="eeknight" rel="home">eeknight</a>
-      </h1>
-      
-        <h2 class="site-description hitokoto"></h2>
-        <script type="text/javascript" src="https://v1.hitokoto.cn/?encode=js"></script>
-      
-    </hgroup>
-
-    <nav id="site-navigation" class="main-navigation" role="navigation">
-            <button class="menu-toggle">菜单</button>
-            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
-            <div class="menu-main-container">
-                <ul id="menu-main" class="nav-menu">
-                
-                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
-                
-                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
-                
-                </ul>
-            </div>
-    </nav>
-</header>
-
-      <div id="main" class="wrapper">
-        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-buuctf-杂项1" class="post-buuctf-杂项1 post type-post status-publish format-standard hentry">
-    <!---->
-
-      <header class="entry-header">
-        
-        
-  
-    <h1 class="entry-title article-title">
-      BUUCTF-杂项
-    </h1>
-  
-
-        
-        <div class="comments-link">
-            
-            <a href="javascript:void(0);" data-url="http://example.com/2020/09/13/buuctf-%E6%9D%82%E9%A1%B91/" data-id="ckgf94me60000r8v5dpmb0lq0" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
-        </div><!-- .comments-link -->
-      </header><!-- .entry-header -->
-
-    <div class="entry-content">
-      
-        <h2 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h2><p>[TOC]</p>
-<h3 id="N种方法解决"><a href="#N种方法解决" class="headerlink" title="N种方法解决"></a>N种方法解决</h3><p>打开后下载文件key.exe</p>
-<p>放到010Editor.exe里面可以看到一段文本</p>
-<p>由于前面是image/jpg 和base64加密 就直接去网上解密并弄成图片形式</p>
-<p>网站：<a target="_blank" rel="noopener" href="https://the-x.cn/base64/%EF%BC%88%E6%B3%A8%E6%84%8F%E8%A6%81%E6%8A%8A%E5%89%8D%E9%9D%A2%E7%9A%84data:image/jpg;base64,%E8%BF%99%E4%B8%80%E6%AE%B5%E5%8E%BB%E6%8E%89%E6%89%8D%E5%8F%AF%E4%BB%A5%E7%BC%96%E8%AF%91%EF%BC%89">https://the-x.cn/base64/（注意要把前面的data:image/jpg;base64,这一段去掉才可以编译）</a></p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDEDFCPDCCOHAGOGH" alt="2.png"></p>
-<p>得到一个二维码 扫完就有flag</p>
-<h3 id="wireshark"><a href="#wireshark" class="headerlink" title="wireshark"></a>wireshark</h3><p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDEDGCPDBCOHAGOGH" alt="1.png"></p>
-<p>这里要用到wireshark这个工具–虚拟机上有</p>
-<p>下载后打开看到一堆东西</p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDEDHCPDCCOHAGOGH" alt="2.png"></p>
-<p>根据提示直接过滤出POST包</p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDEDICPDDCOHAGOGH" alt="3.png"></p>
-<p>找到flag–value里面的数据就是flag</p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDEDJCPDECOHAGOGH" alt="4.png"></p>
-<h3 id="被嗅探的流量"><a href="#被嗅探的流量" class="headerlink" title="被嗅探的流量"></a>被嗅探的流量</h3><p>某黑客潜入到某公司内网通过嗅探抓取了一段文件传输的数据，该数据也被该公司截获，你能帮该公司分析他抓取的到底是什么文件的数据吗？ 注意：得到的 flag 请包上 flag{} 提交</p>
-<p>下载文件</p>
-<p>用wireshark看</p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDFDACPDBCOHAGOGH" alt="1.png"></p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDFDDCPDCCOHAGOGH" alt="2.png"></p>
-<h3 id="easycap"><a href="#easycap" class="headerlink" title="easycap"></a>easycap</h3><p>下载后直接丢到wireshark里面 </p>
-<p>看第一个的追踪流直接出flag</p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDIDHCPDBCOHAGOGH" alt="1.png"></p>
-<h3 id="FLAG"><a href="#FLAG" class="headerlink" title="FLAG"></a>FLAG</h3><p>下载后是这个图片</p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDIDICPDBCOHAGOGH" alt="1.png"></p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDIDJCPDDCOHAGOGH" alt="3.png"></p>
-<p>看到pk 用zip去解压</p>
-<p>解压后丢进010editor</p>
-<p>题目说的是hctf 所以去找hctf</p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDJDACPDGCOHAGOGH" alt="6.png"></p>
-<h3 id="另外一个世界"><a href="#另外一个世界" class="headerlink" title="另外一个世界"></a>另外一个世界</h3><p>下载后是一张图片 </p>
-<p>丢进010里面  看到后面有101010这些二进制很可疑</p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDJDCCPDGCOHAGOGH" alt="6.png"></p>
-<p>去这个网站解密<a target="_blank" rel="noopener" href="http://ctf.ssleye.com/jinzhi.html">http://ctf.ssleye.com/jinzhi.html</a></p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDJDECPDHCOHAGOGH" alt="7.png"></p>
-<p>得到的结果加上flag{koekj3s}</p>
-<h3 id="假如给我三天光明"><a href="#假如给我三天光明" class="headerlink" title="假如给我三天光明"></a>假如给我三天光明</h3><p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDFDJDGCPDBCOHAGOGH" alt="1.png"></p>
-<p>有两个东西 zip是加密文件 ，应该是要用jpg去找到密码</p>
-<p>在图片下面有黑点 （盲文）</p>
-<p>解密后是kmdonowg</p>
-<p>里面是音频</p>
-<p>用Audacity打开</p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDDDGCPDGCOHAGOGH" alt="6.png"></p>
-<p>看出来是摩斯密码</p>
-<p>-.-. - ..-. .– .–. . .. —– —.. …– ..— ..–.. ..— …– -.. –..</p>
-<p>去解密得到的可能是大写字母 最后要改一下</p>
-<p> flag{wpei08732?23dz}</p>
-<h3 id="A-Beautiful-Picture"><a href="#A-Beautiful-Picture" class="headerlink" title="A_Beautiful_Picture"></a>A_Beautiful_Picture</h3><p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDDDICPDBCOHAGOGH" alt="1.png"></p>
-<p>看上去没什么东西 ，可能长度有点问题，尝试去修改一下，改成长宽一样就出来falg</p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDEDACPDDCOHAGOGH" alt="3.png"></p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDDDJCPDCCOHAGOGH" alt="2.png"></p>
-<h3 id="神秘龙卷风"><a href="#神秘龙卷风" class="headerlink" title="神秘龙卷风"></a>神秘龙卷风</h3><p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDEDCCPDBCOHAGOGH" alt="1.png"></p>
-<p>破解rar 因为是4为纯数字 直接暴力破解</p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDEDDCPDCCOHAGOGH" alt="2.png"></p>
-<p>打开文件，看到这个奇奇怪怪的东西，想去破解他</p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDEDECPDDCOHAGOGH" alt="3.png"></p>
-<p><a target="_blank" rel="noopener" href="https://www.splitbrain.org/services/ook%E5%8E%BB%E8%BF%99%E4%B8%AA%E7%BD%91%E7%AB%99%E5%B0%B1%E5%8F%AF%E4%BB%A5%E8%A7%A3%E5%AF%86">https://www.splitbrain.org/services/ook去这个网站就可以解密</a></p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDEDFCPDECOHAGOGH" alt="4.png"></p>
-<h3 id="来首歌吧"><a href="#来首歌吧" class="headerlink" title="来首歌吧"></a>来首歌吧</h3><p>打开是一个音频</p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDEDGCPDBCOHAGOGH" alt="1.png"></p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDEDICPDCCOHAGOGH" alt="2.png"></p>
-<p>….. -… -.-. —-. ..— ….. -…. ….- —-. -.-. -… —– .—- —.. —.. ..-. ….. ..— . -…. .—- –… -.. –… —– —-. ..— —-. .—- —-. .—- -.-.</p>
-<p>弄出了摩斯密码去解密，得到下面的结果加个falg{}就可以</p>
-<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDCDHDGDEDHCPDDCOHAGOGH" alt="3.png"></p>
-
-      
-    </div><!-- .entry-content -->
-
-    <footer class="entry-meta">
-    <a href="/2020/09/13/buuctf-%E6%9D%82%E9%A1%B91/">
-    <time datetime="2020-09-12T16:00:00.000Z" class="entry-date">
-        2020-09-13
-    </time>
-</a>
-    
-    
-  <span class="article-delim">&#8226;</span>
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BB%83%E4%B9%A0/" rel="tag">练习</a></li></ul>
-
-    </footer>
-</article>
-
-
-    
-<nav class="nav-single">
-    <h3 class="assistive-text">文章导航</h3>
-    
-        <span class="nav-previous"><a href="/2020/09/13/hello-world/" rel="prev"><span class="meta-nav">←</span> Hello World</a></span>
-    
-    
-</nav><!-- .nav-single -->
-
-
-
-
-
-
-
-</div></div>
-        <div id="secondary" class="widget-area" role="complementary">
-  
-    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
-    <div>
-        <input type="text" value="" name="s" id="s" />
-        <input type="submit" id="searchsubmit" value="搜索" />
-    </div>
-</form></aside>
-  
-    
-  <aside class="widget">
-    <h3 class="widget-title">Music</h3>
-    <div class="widget-content">
-      <audio src="[object Object]" controls="controls"
-             style="width:100%">
-             <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1463165983&auto=1&height=66"></iframe>
-      </audio>
-    </div>
-  </aside>
-
-  
-    
-  
-    
-  <aside class="widget">
-    <h3 class="widget-title">Recents</h3>
-    <div class="widget-content">
-      <ul>
-        
-          <li>
-            <a href="/2020/10/18/ping/">Ping</a>
-          </li>
-        
-          <li>
-            <a href="/2020/10/03/%E5%8F%8D%E5%BA%8F%E5%88%97/">反序列化</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/20/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/">命令执行漏洞</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/13/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/13/buuctf-%E6%9D%82%E9%A1%B91/">BUUCTF-杂项</a>
-          </li>
-        
-      </ul>
-    </div>
-  </aside>
-
-  
-    
-  <aside class="widget">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget-content">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" rel="tag">知识点</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%83%E4%B9%A0/" rel="tag">练习</a><span class="tag-list-count">1</span></li></ul>
-    </div>
-  </aside>
-
-  
-    
-  <aside class="widget">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget-content tagcloud">
-      <a href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" style="font-size: 20px;">知识点</a> <a href="/tags/%E7%BB%83%E4%B9%A0/" style="font-size: 10px;">练习</a>
-    </div>
-  </aside>
-
-  
-</div>
-      </div>
-      <footer id="colophon" role="contentinfo">
-    <p>&copy; 2020 eeknight
-    All rights reserved.</p>
-    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
-</footer>
-    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/js/share.js'];</script>
-
-<script src="/js/jquery-3.3.1.min.js"></script>
-
-
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-
-  
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-<script src="/js/navigation.js"></script>
-
-<div id="bg"></div>
-
-  </div>
-</body>
-</html>
+{% block body %}
+  {% include 'math/index.swig' %}
+  <article id="post">
+    <h1>{{ page.title || __('without_title') }}</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">{{ __('created_at') }} {{ date(page.date) }}</span>
+      {% if page.date !== page.updated %}
+        <span id = "post-title-updated">{{ __('updated_at') }} {{ date(page.updated) }}</span>
+      {% endif %}
+      {% if page.categories.length %}
+      <span id = "post-title-categories">{{ __('category_title') }}
+      {% set i = 0 %}
+      {% for cat in page.categories %}
+        {% if i !== 0 %}
+          {{'/'}}
+        {% endif %}
+        {% set i = i + 1 %}
+        <a href="{{ url_for(cat.path) }}">{{ cat.name }}</a>
+      {% endfor %}
+      </span>
+      {% endif %}
+      {% if page.tags.length %}
+        <span id = "post-title-tags">
+          {{ __('tag_title') }}
+          {% set i = 0 %}
+          {% for tag in page.tags %}
+            {% if i !== 0 %}
+              {{'/'}}
+            {% endif %}
+            {% set i = i + 1 %}
+            <a href="{{ url_for(tag.path) }}">{{ tag.name }}</a>
+          {% endfor %}
+        </span>
+      {% endif %}
+      <span id="/{{ page.path }}" class="leancloud-visitors" data-flag-title="{{ page.title }}">
+        <i class="leancloud-visitors-count"></i>
+        <em class="post-meta-item-text"> views </em>
+      </span>
+    </p>
+    {% if page.photos.length %}
+      {% include 'includes/gallery.swig' %}
+    {% endif %}
+    {% autoescape false %}{{ page.content }}{% endautoescape %}
+  </article>
+  {% include 'includes/toc.swig' %}
+  {% if page.comments && (theme.valine.enable) %}
+    {% include 'includes/valine.swig' %}
+  {% endif %}
+  {% include 'includes/pagination.swig' %}
+  {% include 'includes/jiathis.swig' %}
+{% endblock %}
