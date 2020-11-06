@@ -1,3 +1,12 @@
+---
+title: music
+type: music
+layout: Permalinks
+
+---
+
+
+
 <html>
 <head>
 <meta charset="utf-8">
