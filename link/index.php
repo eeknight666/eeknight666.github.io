@@ -1,6 +1,6 @@
 ---
 title: link
-type: link
+type:  link
 layout: Permalinks
 
 ---
