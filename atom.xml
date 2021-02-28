@@ -18,8 +18,8 @@
   
   <entry>
     <title>XSS漏洞</title>
-    <link href="http://example.com/2021/02/28/xss/"/>
-    <id>http://example.com/2021/02/28/xss/</id>
+    <link href="http://example.com/2021/02/28/xss%E6%BC%8F%E6%B4%9E/"/>
+    <id>http://example.com/2021/02/28/xss%E6%BC%8F%E6%B4%9E/</id>
     <published>2021-02-28T01:58:23.329Z</published>
     <updated>2021-02-28T01:57:34.906Z</updated>
     
