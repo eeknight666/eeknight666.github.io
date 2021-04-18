@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://example.com/2020/12/04/xxe/</loc>
+    
+    <lastmod>2021-04-18</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://example.com/2021/03/15/%E7%BB%86%E8%AF%B4%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%96%E9%82%A3%E4%BA%9B%E4%BA%8B/</loc>
     
     <lastmod>2021-04-09</lastmod>
@@ -121,13 +128,6 @@
   </url>
   
   <url>
-    <loc>http://example.com/2020/12/04/xxe/</loc>
-    
-    <lastmod>2020-12-04</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://example.com/link/index.html</loc>
     
     <lastmod>2020-11-22</lastmod>
@@ -193,7 +193,7 @@
 
   <url>
     <loc>http://example.com/</loc>
-    <lastmod>2021-04-09</lastmod>
+    <lastmod>2021-04-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -201,28 +201,28 @@
   
   <url>
     <loc>http://example.com/tags/%E7%BB%83%E4%B9%A0/</loc>
-    <lastmod>2021-04-09</lastmod>
+    <lastmod>2021-04-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://example.com/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/</loc>
-    <lastmod>2021-04-09</lastmod>
+    <lastmod>2021-04-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://example.com/tags/writeup/</loc>
-    <lastmod>2021-04-09</lastmod>
+    <lastmod>2021-04-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://example.com/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/</loc>
-    <lastmod>2021-04-09</lastmod>
+    <lastmod>2021-04-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -231,35 +231,35 @@
   
   <url>
     <loc>http://example.com/categories/CTF/</loc>
-    <lastmod>2021-04-09</lastmod>
+    <lastmod>2021-04-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://example.com/categories/linux/</loc>
-    <lastmod>2021-04-09</lastmod>
+    <lastmod>2021-04-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://example.com/categories/python/</loc>
-    <lastmod>2021-04-09</lastmod>
+    <lastmod>2021-04-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://example.com/categories/ctf/</loc>
-    <lastmod>2021-04-09</lastmod>
+    <lastmod>2021-04-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://example.com/categories/%E6%BC%8F%E6%B4%9E/</loc>
-    <lastmod>2021-04-09</lastmod>
+    <lastmod>2021-04-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
