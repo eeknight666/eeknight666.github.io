@@ -1,0 +1,277 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>鲸鱼的世界</title><meta name="author" content="eeknight"><meta name="copyright" content="eeknight"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta property="og:type" content="website">
+<meta property="og:title" content="鲸鱼的世界">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="鲸鱼的世界">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/preview.jpg">
+<meta property="article:author" content="eeknight">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/preview.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2021-05-09 16:39:41'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {
+  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }
+})()</script><meta name="generator" content="Hexo 5.1.1"><link rel="alternate" href="/atom.xml" title="鲸鱼的世界" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/preview.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div id="body-wrap"><header class="full_page" id="page-header" style="background-image: url(/img/ee5.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">鲸鱼的世界</a></span><span id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="site-info"><h1 id="site-title">鲸鱼的世界</h1><div id="site-subtitle"><span id="subtitle"></span></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2021/05/08/SSTI/" title="SSTI">     <img class="post_bg" src="http://eeknight.top/img/58.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SSTI"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/05/08/SSTI/" title="SSTI">SSTI</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-05-07T16:00:00.000Z" title="发表于 2021-05-08 00:00:00">2021-05-08</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/CTF/">CTF</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag article-meta__icon"></i><a class="article-meta__tags" href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a></span></div><div class="content">SSTI漏洞简介SSTI就是服务器端模板注入(Server-Side Template Injection)
+SSTI是先获取了一个输入，再后端的渲染处理上进行了语句的拼接，然后执行。SSTI利用的是现在的网站模板引擎主要是Python的jinja2 mako tornado django，php的smarty twig，java的jade velocity。当这些框架对运用渲染函数生成html的时候会出现SSTI的问题。
+前置知识模板引擎
+模板引擎（这里特指用于Web开发的模板引擎）是为了使用户界面与业务数据（内容）分离而产生的，它可以生成特定格式的文档，用于网站的模板引擎就会生成一个标准的HTML文档。模板引擎可以让（网站）程序实现界面与数据分离，业务代码与逻辑代码的分离，这就大大提升了开发效率，良好的设计也使得代码重用变得更加容易。
+也就是说，利用模板引擎来生成前端的html代码，模板引擎会提供一套生成html代码的程序，然后只需要获取用户的数据，然后放到渲染函数里，然后生成模板+用户数据的前端html页面，然后反馈给浏览器，呈现在用户面前。
+
+jinja2模板引擎这里先放个说的 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2021/03/16/%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/" title="代码执行">     <img class="post_bg" src="http://eeknight.top/img/60.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="代码执行"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/03/16/%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/" title="代码执行">代码执行</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-03-16T14:50:04.420Z" title="发表于 2021-03-16 22:50:04">2021-03-16</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/ctf/">ctf</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag article-meta__icon"></i><a class="article-meta__tags" href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a></span></div><div class="content">代码执行代码执行漏洞跟命令执行有点像，只不过如果存在代码执行漏洞的话大概率可以用来构造成命令执行漏 洞，如果存在代码执行漏洞并且可以被你利用，你可以认为你已经拿下这台服务器的web权限了。
+代码执行函数
+
+eval()—·执行php代码不执行系统命令
+assert()—执行php代码
+call_user_func()—执行php代码
+
+直接执行代码两个关键函数
+12eval();assert();
+
+assertassert会把传入的参数执行(当参数为表达式时才能执行)，如：
+123&lt;?php $a = 5;assert(&#x27;$a=6&#x27;); echo $a; //6
+
+在php版本&gt;=7.2时会报错。 assert通常会被我们用来与eval配合绕过一些过滤。
+eval``eval`允许我们传入字符串参数，并将其进行计算，如：
+1&lt;?php eval(&#x27;echo 6+6;&#x27;); //12
+
+此时会输出12，可以看到eval会将echo也执行了，也就是说eval会将传入的php代码执行。此时如果有如下代码：
+1&lt;?php @ev ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2021/03/16/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/" title="linux命令学习">     <img class="post_bg" src="http://eeknight.top/img/76.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="linux命令学习"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/03/16/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/" title="linux命令学习">linux命令学习</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-03-16T13:55:34.099Z" title="发表于 2021-03-16 21:55:34">2021-03-16</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/linux/">linux</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag article-meta__icon"></i><a class="article-meta__tags" href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a></span></div><div class="content">linux命令学习&gt;和&gt;&gt;符号&gt;
+创建文件
+12&gt;eeknight.txtls
+
+
+
+将命令执行的结果写入文件
+1echo &quot;linux study&quot;&gt;eeknight.txt
+
+
+
+
+注：用&gt;来将命令执行结果写入文件会覆盖掉文件原本的内容，所以我们要用&gt;&gt;在原本文件内容后面追加内容
+12echo &quot;ctf study&quot;&gt;eeknight.txtcat eeknight.txt
+
+
+&gt;&gt;12echo &quot;web Study&quot;&gt;&gt;eeknight.txtcat eeknight.txt
+
+
+命令换行在linux系统中，当我们执行命令是没写完，我们可以在没写完的命令后加\，将一条命令分成多行。
+12345ca\&gt; t \&gt; eeknight.txt ctf study                                                                                     we ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2021/03/15/%E7%BB%86%E8%AF%B4%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%96%E9%82%A3%E4%BA%9B%E4%BA%8B/" title="细说变量覆盖那些事">     <img class="post_bg" src="http://eeknight.top/img/78.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="细说变量覆盖那些事"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/03/15/%E7%BB%86%E8%AF%B4%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%96%E9%82%A3%E4%BA%9B%E4%BA%8B/" title="细说变量覆盖那些事">细说变量覆盖那些事</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-03-14T16:00:00.000Z" title="发表于 2021-03-15 00:00:00">2021-03-15</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/CTF/">CTF</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag article-meta__icon"></i><a class="article-meta__tags" href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a></span></div><div class="content">变量覆盖那些事前言文章首发合天：变量覆盖那些事
+最近在挖洞和看一些ctf题目中可以看到一些变量覆盖的知识点，之前对这个方面学习的有点不全面，虽然网上有这方面的文章，但是感觉讲的不是很全面，所以就决定写一篇文章来总结这方面的知识。
+漏洞原理变量覆盖是指可以用自己的传参值代替程序原有的变量值。
+漏洞寻找例如下面的函数或者语法使用不当时就会出现漏洞。
+
+$$
+extract()
+parse_str()
+import_request_variables()
+mb_parse_str
+register_globals
+
+漏洞解析这里先分析函数，再分析漏洞。
+extract()原理extract()函数从数组中将变量导入到当前的符号表。
+例如
+123456789&lt;?php$a = &quot;eeknight&quot;;$my_array = array(&quot;a&quot; =&gt; &quot;C&quot;,&quot;b&quot; =&gt; &quot;T&quot;, &quot;c&quot; =&gt; &quot;F&quot;);extract($my_arr ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2021/03/10/JWT/" title="JWT">     <img class="post_bg" src="http://eeknight.top/img/49.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JWT"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/03/10/JWT/" title="JWT">JWT</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-03-09T16:00:00.000Z" title="发表于 2021-03-10 00:00:00">2021-03-10</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/CTF/">CTF</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag article-meta__icon"></i><a class="article-meta__tags" href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a></span></div><div class="content">JWT基础知识简介Json web token简称JWT，是为了在网络应用环境间传递声明而执行的一种基于JSON的开放标准。
+总结成一句话，就是这是一种认证机制，让后台知道请求是来自于受信的客户端。
+ 这个东西跟浏览器的cookie是一个作用，好比我在一个网站登录了，就可以往这个网站发送restful请求，请求的同时会捎带上cookie，后台检查这个cookie发现你是合法的，才响应你的请求。
+原理JWT 的原理是，服务器认证以后，生成一个 JSON 对象，发回给用户，就像下面这样。
+1234&#123;  &quot;name&quot;: &quot;eeknight&quot;,   &quot;admin&quot;: true 	 &#125;
+
+然后，当用户访问服务器端时，通过发送这个 JSON 对象。服务器就可以识别用户身份。为了防止用户篡改数据，服务器在生成这个对象的时候，会加上签名。
+适用的场景
+授权(Authorization) : 当用户第一次登录后，后续每个请求都将包含JWT，允许用户访问该令牌允许的服务和资源等。单点登录是现在广泛使用的JWT的一个特性，因为它 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2021/02/28/xss%E6%BC%8F%E6%B4%9E/" title="XSS漏洞">     <img class="post_bg" src="http://eeknight.top/img/13.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="XSS漏洞"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/02/28/xss%E6%BC%8F%E6%B4%9E/" title="XSS漏洞">XSS漏洞</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-02-28T01:58:23.329Z" title="发表于 2021-02-28 09:58:23">2021-02-28</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/CTF/">CTF</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag article-meta__icon"></i><a class="article-meta__tags" href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a></span></div><div class="content">XSS漏洞前言先简单学习一下xss，后续会更新更多的xss的知识。
+xss是什么xss漏洞原理XSS是一种发生在前端浏览器端的漏洞，是指攻击者通过在Web页面中写入恶意脚本，造成用户在浏览页面时，控制用户浏览器进行操作的攻击方式。
+一种经常出现在web应用程序中的计算机安全漏洞，是由于web应用程序对用户的输入过滤不严而产生的。攻击者利用网站漏洞把恶意的脚本代码注入到网页中，当其他用户浏览这些网页时，就会执行其中的恶意代码，对受害用户可能采用cookie资料窃取，会话劫持，钓鱼欺骗等攻击手段。
+xss的危害诚然，XSS可能不如SQL注射、文件上传等能够直接得到较高操作权限的漏洞，但是它的运用十分灵活（这使它成为最深受黑客喜爱的攻击技术之一），只要开拓思维，适当结合其他技术一起运用，XSS的威力还是很大的。可能会给网站和用户带来的危害简单概括如下：
+
+网络钓鱼
+盗取用户cookies信息
+劫持用户浏览器
+强制弹出广告页面、刷流量
+网页挂马
+进行恶意操作，例如任意篡改页面信息
+获取客户端隐私信息
+控制受害者机器向其他网站发起攻击
+结合其他漏洞，如CSRF漏洞，实施进一步作恶
+提升用户权限， ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2021/02/26/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" title="命令执行漏洞">     <img class="post_bg" src="http://eeknight.top/img/75.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="命令执行漏洞"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/02/26/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" title="命令执行漏洞">命令执行漏洞</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-02-26T12:58:22.230Z" title="发表于 2021-02-26 20:58:22">2021-02-26</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/CTF/">CTF</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag article-meta__icon"></i><a class="article-meta__tags" href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a></span></div><div class="content">命令执行漏洞pingping直接输入地址并执行自己想要的命令
+有index.php可以试试
+访问成功，在试试寻找“.txt”文件，输入命令 127.0.0.1 &amp;&amp;find / -name “*.txt”
+找到flag文件了，用cat命令抓一下：127.0.0.1 &amp;&amp; cat /home/flag.txt
+ping 127.0.0.1&amp;&amp;dir
+
+
+一些命令函数
+1234567system()passthru()exec()shell_exec()popen()proc_open()pcntl_exec()
+
+
+system
+
+1system ( string &#96;$command&#96; [, int &#96;&amp;$return_var&#96; ] ) : string
+
+类似于c语言中的system，他会把传入的参数作为系统命令执行，system返回结果并且输出，这意味着我们可以打印system的输出结果。
+示例：
+12system(&#39;ping www.baidu.com&#39;);echo(system ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2021/02/26/%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D/" title="永恒之蓝复现">     <img class="post_bg" src="http://eeknight.top/img/23.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="永恒之蓝复现"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/02/26/%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D/" title="永恒之蓝复现">永恒之蓝复现</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-02-26T12:50:15.447Z" title="发表于 2021-02-26 20:50:15">2021-02-26</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E6%BC%8F%E6%B4%9E/">漏洞</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag article-meta__icon"></i><a class="article-meta__tags" href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">漏洞复现</a></span></div><div class="content">永恒之蓝永恒之蓝是2017年爆发的一个大型勒索病毒。
+这里简单复现一下。
+准备环境win7靶机一台，linux攻击机一台
+操作先查看被攻击机(win7)的ip和攻击机(linus)的ip
+在win7的cmd中输入ipconfig，在linux输入ifconfig就可以看到。
+12win7----192.168.146.136linus---192.168.146.129
+
+在linux中打开msfconsole
+
+msfconsole的开启画面可能不一样，没有关系。
+1搜索search ms17-010   #ms17-010是永恒之蓝的编号
+
+
+验证是否存在永恒之蓝漏洞这里可用msfconsole也可以用nmap
+msfconsole12345use 1show options                #查看功能set rhost 192.168.146.136set rport 445  				#设置445端口run  						#执行
+
+
+上述的返回情况说明存在该漏洞
+nmap1nmap -sV 192.168.146.136 （win7 ）
+
+
+445端口开放，目的主 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2021/02/25/xmctf/" title="星盟考核">     <img class="post_bg" src="http://eeknight.top/img/48.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="星盟考核"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/02/25/xmctf/" title="星盟考核">星盟考核</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-02-24T16:00:00.000Z" title="发表于 2021-02-25 00:00:00">2021-02-25</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/CTF/">CTF</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag article-meta__icon"></i><a class="article-meta__tags" href="/tags/writeup/">writeup</a></span></div><div class="content">xmctfweb3-考核源码
+123456789101112&lt;?phphighlight_file(__FILE__);$content = @$_GET[&#x27;content&#x27;] ? &quot;---mylocalnote---\n&quot; . $_GET[&#x27;content&#x27;] : &quot;&quot;;$name = @$_GET[&#x27;name&#x27;] ? $_GET[&#x27;name&#x27;] : &#x27;&#x27;;str_replace(&#x27;/&#x27;, &#x27;&#x27;, $name);str_replace(&#x27;\\&#x27;, &#x27;&#x27;, $name);file_put_contents(&quot;/tmp/&quot; . $name, $content);session_start();if (isset($_SESSION[&#x27;username&#x27;])) &#123;    echo &quot;Thank u,&#123 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2021/01/27/G2mtu%E9%A2%98%E7%9B%AE/" title="G2mtu题目">     <img class="post_bg" src="http://eeknight.top/img/34.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="G2mtu题目"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/01/27/G2mtu%E9%A2%98%E7%9B%AE/" title="G2mtu题目">G2mtu题目</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-01-26T16:00:00.000Z" title="发表于 2021-01-27 00:00:00">2021-01-27</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/CTF/">CTF</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag article-meta__icon"></i><a class="article-meta__tags" href="/tags/%E7%BB%83%E4%B9%A0/">练习</a></span></div><div class="content">G2mtu题目前言记录G2mtu的题目，后续会更新新出的题。
+easysql_cat师兄发布的时候解不出来，现在复现一下。
+题目说了是sql，这里就去看看是什么类型的sql注入。先判断是数值型还是字符型的注入，用&#39;去判断，然后发现被过滤了，就用运算符号，发现可以实现，说明这是一个数值型的注入。
+
+这里还有一个提示：flag在flag表的flag字段
+这里正常操作是用if mid 去得到
+if(mid((select flag from flag),2,1)=’f’,1,2)
+但是这里过滤了很多东西，用burp去爆破一下看看过滤了什么。
+
+这里过滤if,&lt;,&gt;AND,=,’,空格还有很多。
+所以要用替换的思路去。
+1234空格---可以用%09去替代，%09是tab的url编码。还有%0a，%0b,%0c都可以if ---用like去替代&#x3D;  ---用case when+left去替代&#39;&#39; ---用ascill或者16进制去替换，如&#39;f&#39;可以用0x66替换
+
+先直接构造，
+12cat&#x3D;100 or case when ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/preview.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">eeknight</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/eeknight666"><i class="fab fa-github"></i><span>Follow Me</span></a></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">Web菜鸟的博客</div></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/05/08/SSTI/" title="SSTI"><img src="http://eeknight.top/img/58.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SSTI"/></a><div class="content"><a class="title" href="/2021/05/08/SSTI/" title="SSTI">SSTI</a><time datetime="2021-05-07T16:00:00.000Z" title="发表于 2021-05-08 00:00:00">2021-05-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/16/%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/" title="代码执行"><img src="http://eeknight.top/img/60.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="代码执行"/></a><div class="content"><a class="title" href="/2021/03/16/%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/" title="代码执行">代码执行</a><time datetime="2021-03-16T14:50:04.420Z" title="发表于 2021-03-16 22:50:04">2021-03-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/16/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/" title="linux命令学习"><img src="http://eeknight.top/img/76.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="linux命令学习"/></a><div class="content"><a class="title" href="/2021/03/16/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/" title="linux命令学习">linux命令学习</a><time datetime="2021-03-16T13:55:34.099Z" title="发表于 2021-03-16 21:55:34">2021-03-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/15/%E7%BB%86%E8%AF%B4%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%96%E9%82%A3%E4%BA%9B%E4%BA%8B/" title="细说变量覆盖那些事"><img src="http://eeknight.top/img/78.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="细说变量覆盖那些事"/></a><div class="content"><a class="title" href="/2021/03/15/%E7%BB%86%E8%AF%B4%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%96%E9%82%A3%E4%BA%9B%E4%BA%8B/" title="细说变量覆盖那些事">细说变量覆盖那些事</a><time datetime="2021-03-14T16:00:00.000Z" title="发表于 2021-03-15 00:00:00">2021-03-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/10/JWT/" title="JWT"><img src="http://eeknight.top/img/49.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JWT"/></a><div class="content"><a class="title" href="/2021/03/10/JWT/" title="JWT">JWT</a><time datetime="2021-03-09T16:00:00.000Z" title="发表于 2021-03-10 00:00:00">2021-03-10</time></div></div></div></div></div><div class="card-widget card-categories"><div class="card-content"><div class="item-headline"><i class="fas fa-folder-open"></i><span>分类</span></div><ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/CTF/"><span class="card-category-list-name">CTF</span><span class="card-category-list-count">20</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/ctf/"><span class="card-category-list-name">ctf</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/linux/"><span class="card-category-list-name">linux</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/python/"><span class="card-category-list-name">python</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%BC%8F%E6%B4%9E/"><span class="card-category-list-name">漏洞</span><span class="card-category-list-count">1</span></a></li>
+            
+            </ul></div></div><div class="card-widget card-tags"><div class="card-content"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/writeup/" style="font-size: 1.37em; color: #99a4b2">writeup</a> <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" style="font-size: 1.1em; color: #999">漏洞复现</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" style="font-size: 1.5em; color: #99a9bf">知识点</a> <a href="/tags/%E7%BB%83%E4%B9%A0/" style="font-size: 1.23em; color: #999ea6">练习</a></div></div></div><div class="card-widget card-archives"><div class="card-content"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/05/"><span class="card-archive-list-date">五月 2021</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/03/"><span class="card-archive-list-date">三月 2021</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/02/"><span class="card-archive-list-date">二月 2021</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/01/"><span class="card-archive-list-date">一月 2021</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/12/"><span class="card-archive-list-date">十二月 2020</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/11/"><span class="card-archive-list-date">十一月 2020</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/10/"><span class="card-archive-list-date">十月 2020</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/09/"><span class="card-archive-list-date">九月 2020</span><span class="card-archive-list-count">1</span></a></li></ul></div></div><div class="card-widget card-webinfo"><div class="card-content"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">24</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2021-05-09T08:39:41.098Z"></div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">55.4k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2021-05-09T08:39:41.142Z"></div></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/ee7.png)"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By eeknight</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script></div></body></html>
