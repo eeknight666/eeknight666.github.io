@@ -1,0 +1,249 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PIL库使用 | 鲸鱼的世界</title><meta name="keywords" content="MISC"><meta name="author" content="eeknight"><meta name="copyright" content="eeknight"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="PIL库使用函数说明Image.open()  读取文件 Image.save()保存文件，也可以用save方法来进行图片的格式转换。 12345将文件修改后缀（这里是创建了一个png文件）from PIL import Imageimg &#x3D; &quot;xiao.jpg&quot;ch  &#x3D; &quot;xiao.png&quot;Image.open(img).save(c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PIL库使用">
+<meta property="og:url" content="http://example.com/2021/05/30/PIL%E5%BA%93%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="鲸鱼的世界">
+<meta property="og:description" content="PIL库使用函数说明Image.open()  读取文件 Image.save()保存文件，也可以用save方法来进行图片的格式转换。 12345将文件修改后缀（这里是创建了一个png文件）from PIL import Imageimg &#x3D; &quot;xiao.jpg&quot;ch  &#x3D; &quot;xiao.png&quot;Image.open(img).save(c">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://eeknight.top/img/69.jpg">
+<meta property="article:published_time" content="2021-05-29T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-05-30T15:22:02.382Z">
+<meta property="article:author" content="eeknight">
+<meta property="article:tag" content="MISC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://eeknight.top/img/69.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2021/05/30/PIL%E5%BA%93%E4%BD%BF%E7%94%A8/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-05-30 23:22:02'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {
+  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }
+})()</script><meta name="generator" content="Hexo 5.1.1"><link rel="alternate" href="/atom.xml" title="鲸鱼的世界" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/preview.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">28</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(http://eeknight.top/img/69.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">鲸鱼的世界</a></span><span id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><h1 class="post-title">PIL库使用</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-05-29T16:00:00.000Z" title="发表于 2021-05-30 00:00:00">2021-05-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-05-30T15:22:02.382Z" title="更新于 2021-05-30 23:22:02">2021-05-30</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/CTF/">CTF</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">865</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="PIL库使用"><a href="#PIL库使用" class="headerlink" title="PIL库使用"></a>PIL库使用</h1><h2 id="函数说明"><a href="#函数说明" class="headerlink" title="函数说明"></a>函数说明</h2><h3 id="Image-open"><a href="#Image-open" class="headerlink" title="Image.open()"></a><code>Image.open()</code></h3><p>  读取文件</p>
+<h3 id="Image-save"><a href="#Image-save" class="headerlink" title="Image.save()"></a><code>Image.save()</code></h3><p>保存文件，也可以用save方法来进行图片的格式转换。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">将文件修改后缀（这里是创建了一个png文件）</span><br><span class="line">from PIL import Image</span><br><span class="line">img &#x3D; &quot;xiao.jpg&quot;</span><br><span class="line">ch  &#x3D; &quot;xiao.png&quot;</span><br><span class="line">Image.open(img).save(ch)</span><br></pre></td></tr></table></figure>
+
+<h3 id="new"><a href="#new" class="headerlink" title="new"></a><code>new</code></h3><p>方法使用给定的模式和大小创建一个新图像</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PIL.Image.new(mode &#x3D; &quot;RGB&#x2F;p&quot;, size &#x3D; (x,y))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">from PIL import Image</span><br><span class="line">im&#x3D;Image.new(&quot;RGB&quot;,(100,100))</span><br><span class="line">im.show()</span><br></pre></td></tr></table></figure>
+
+<p>这里通常和paste组合使用</p>
+<h3 id="format"><a href="#format" class="headerlink" title="format"></a><code>format</code></h3><p>  format是格式，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">from PIL import Image</span><br><span class="line">img &#x3D; Image.open(&#39;xiao.jpg&#39;)</span><br><span class="line">print(img.format)</span><br><span class="line">输出：JPEG</span><br></pre></td></tr></table></figure>
+
+<h3 id="size"><a href="#size" class="headerlink" title="size"></a><code>size</code></h3><p>size 是一个元组,表示(宽，高)</p>
+<h3 id="mode"><a href="#mode" class="headerlink" title="mode"></a><code>mode</code></h3><p>mode则指的图片的模式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">from PIL import Image</span><br><span class="line">img &#x3D; Image.open(&#39;xiao.jpg&#39;)</span><br><span class="line">print(img.mode)</span><br><span class="line">输出：RGB</span><br></pre></td></tr></table></figure>
+
+<h3 id="show"><a href="#show" class="headerlink" title="show()"></a><code>show()</code></h3><p>这个类似于直接打开图片</p>
+<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDJDBDBDBDFCPDBCOHAGOGH" alt="1.png"></p>
+<h3 id="os-path-splitext"><a href="#os-path-splitext" class="headerlink" title="os.path.splitext()"></a><code>os.path.splitext()</code></h3><p>这个是<code>os</code>模块中的方法，可以将文件名和扩展名分离开来</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line">infile = <span class="string">&#x27;xiao.jpg&#x27;</span></span><br><span class="line">f,e = os.path.splitext(infile)</span><br><span class="line">print(f)</span><br><span class="line">print(e)</span><br><span class="line"></span><br><span class="line">输出：xiao</span><br><span class="line">	.jpg</span><br></pre></td></tr></table></figure>
+
+<h3 id="crop-方法。"><a href="#crop-方法。" class="headerlink" title="crop()方法。"></a>crop()方法。</h3><p>从一张图片中剪切出一块区域，比如从图片提取矩形。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line">im = Image.open(<span class="string">&#x27;xiao.jpg&#x27;</span>)</span><br><span class="line">box = (<span class="number">35</span>,<span class="number">35</span>,<span class="number">60</span>,<span class="number">100</span>)</span><br><span class="line"><span class="comment">#		X1  Y1  X2  Y2</span></span><br><span class="line">region = im.crop(box)</span><br><span class="line">region.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://mkpt.gzmtu.edu.cn/meol/common/ckeditor/openfile.jsp?id=DBCPDCDJDADJDADBCPDBCOHAGOGH" alt="1.png"></p>
+<h3 id="transpose"><a href="#transpose" class="headerlink" title="transpose()"></a><code>transpose()</code></h3><p>Transpose 方向变换</p>
+<p>有一下几种模式FLIP_LEFT_RIGHT ，FLIP_TOP_BOTTOM ，ROTATE_90 ，ROTATE_180 ，ROTATE_270，TRANSPOSE ，TRANSVERSE。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#coding&#x3D;utf-8</span><br><span class="line">from PIL import Image</span><br><span class="line">im &#x3D; Image.open(&#39;xiao.jpg&#39;)</span><br><span class="line">region &#x3D; im.transpose(Image.ROTATE_90)</span><br><span class="line">region.show()</span><br></pre></td></tr></table></figure>
+
+<h3 id="rotate"><a href="#rotate" class="headerlink" title="rotate()"></a><code>rotate()</code></h3><p>旋转图片</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line">im = Image.open(<span class="string">&#x27;xiao.jpg&#x27;</span>)</span><br><span class="line">region = im.rotate(<span class="number">90</span>,expand=<span class="literal">True</span>)</span><br><span class="line">region.show()</span><br><span class="line"></span><br><span class="line"><span class="comment">#expand=True，会将图片长宽进行相应调整，去掉黑边，</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="paste"><a href="#paste" class="headerlink" title="paste()"></a><code>paste()</code></h3><p>粘贴，也就是将图片部分地方修改</p>
+<p>格式为：paste(要贴的图片，要贴的图片的4元坐标组成的区域)。</p>
+<p>如下面，我们把xiao.jpg这张图片，取区域(30,30,80,100)，将该区域旋转180度后贴到原来的位置。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line">im = Image.open(<span class="string">&#x27;xiao.jpg&#x27;</span>)</span><br><span class="line">box = (<span class="number">30</span>,<span class="number">30</span>,<span class="number">80</span>,<span class="number">100</span>)</span><br><span class="line">region = im.crop(box)</span><br><span class="line"><span class="comment"># 将图片逆序旋转180后，黏贴到原来复制的位置 </span></span><br><span class="line">region = region.transpose(Image.ROTATE_180)</span><br><span class="line">im.paste(region,box)</span><br><span class="line">im.show()</span><br></pre></td></tr></table></figure>
+
+<h3 id="getpixel"><a href="#getpixel" class="headerlink" title="getpixel"></a><code>getpixel</code></h3><p>函数是用来获取图像中某一点的像素的RGB颜色值，<code>getpixel</code>的参数是一个坐标点。对于图象的不同的模式，<code>getpixel</code>函数返回的值有所不同。</p>
+<p>返回的是坐标点(x,y)处的red，green，blue的数值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line">img = Image.open(<span class="string">&#x27;xiao.jpg&#x27;</span>)</span><br><span class="line">print(img.getpixel((<span class="number">60</span>,<span class="number">60</span>)))</span><br><span class="line">输出：(<span class="number">221</span>, <span class="number">223</span>, <span class="number">209</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="putpixel"><a href="#putpixel" class="headerlink" title="putpixel"></a><code>putpixel</code></h3><p><code>putpixel()</code>修改x，y处的像素。对于单波段图像，颜色作为单个数值给出；对于multi-band图像，颜色作为元组给出</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line">img = Image.open(<span class="string">&#x27;xiao.jpg&#x27;</span>)</span><br><span class="line">width , height = img.size</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,width):</span><br><span class="line">  <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">0</span>,height):</span><br><span class="line">    tmp = img.getpixel((i,j))</span><br><span class="line">    img.putpixel((i,j),(<span class="number">0</span>,<span class="number">0</span>,tmp[<span class="number">2</span>]))</span><br><span class="line">img.show()</span><br></pre></td></tr></table></figure>
+
+<p>上面是修改坐标的red和green值，blue按原来的值不改变</p>
+<h3 id="gif图片排序"><a href="#gif图片排序" class="headerlink" title="gif图片排序"></a>gif图片排序</h3><p>虽然可以用工具提取，但是还是要学一下PIL的方法</p>
+<p>当处理GIF这种包含多个帧的图片，称之为序列文件，PIL会自动打开序列文件的第一帧。而使用seek和tell方法可以在不同帧移动。tell是帧数，而seek是取当前帧数的图片。</p>
+<p><strong>while</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line">im = Image.open(<span class="string">&quot;6.gif&quot;</span>)</span><br><span class="line">im.seek(<span class="number">1</span>)</span><br><span class="line">im.show()</span><br><span class="line"> </span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line"> <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line"> im.seek(im.tell()+<span class="number">1</span>)</span><br><span class="line"> im.show()</span><br><span class="line"><span class="keyword">except</span> EOFError:</span><br><span class="line"> <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>for</strong></p>
+<p>如果要使用for循环，可以使用<code>ImageSequence</code>模块的<code>Iterator</code>方法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> ImageSequence</span><br><span class="line"> </span><br><span class="line">im = Image.open(<span class="string">&quot;6.gif&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> frame <span class="keyword">in</span> ImageSequence.Iterator(im):</span><br><span class="line">  frame.show()</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">eeknight</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2021/05/30/PIL%E5%BA%93%E4%BD%BF%E7%94%A8/">http://example.com/2021/05/30/PIL%E5%BA%93%E4%BD%BF%E7%94%A8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">鲸鱼的世界</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/MISC/">MISC</a></div><div class="post_share"><div class="addthis_inline_share_toolbox"></div><script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=null" async="async"></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/05/24/%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2/"><img class="next-cover" src="http://eeknight.top/img/64.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">信息泄露</div></div></a></div></nav></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/preview.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">eeknight</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">28</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/eeknight666"><i class="fab fa-github"></i><span>Follow Me</span></a></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">Web菜鸟的博客</div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#PIL%E5%BA%93%E4%BD%BF%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">PIL库使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="toc-number">1.1.</span> <span class="toc-text">函数说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Image-open"><span class="toc-number">1.1.1.</span> <span class="toc-text">Image.open()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Image-save"><span class="toc-number">1.1.2.</span> <span class="toc-text">Image.save()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#new"><span class="toc-number">1.1.3.</span> <span class="toc-text">new</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#format"><span class="toc-number">1.1.4.</span> <span class="toc-text">format</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#size"><span class="toc-number">1.1.5.</span> <span class="toc-text">size</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mode"><span class="toc-number">1.1.6.</span> <span class="toc-text">mode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#show"><span class="toc-number">1.1.7.</span> <span class="toc-text">show()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#os-path-splitext"><span class="toc-number">1.1.8.</span> <span class="toc-text">os.path.splitext()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#crop-%E6%96%B9%E6%B3%95%E3%80%82"><span class="toc-number">1.1.9.</span> <span class="toc-text">crop()方法。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#transpose"><span class="toc-number">1.1.10.</span> <span class="toc-text">transpose()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rotate"><span class="toc-number">1.1.11.</span> <span class="toc-text">rotate()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#paste"><span class="toc-number">1.1.12.</span> <span class="toc-text">paste()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#getpixel"><span class="toc-number">1.1.13.</span> <span class="toc-text">getpixel</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#putpixel"><span class="toc-number">1.1.14.</span> <span class="toc-text">putpixel</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gif%E5%9B%BE%E7%89%87%E6%8E%92%E5%BA%8F"><span class="toc-number">1.1.15.</span> <span class="toc-text">gif图片排序</span></a></li></ol></li></ol></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/05/30/PIL%E5%BA%93%E4%BD%BF%E7%94%A8/" title="PIL库使用"><img src="http://eeknight.top/img/69.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="PIL库使用"/></a><div class="content"><a class="title" href="/2021/05/30/PIL%E5%BA%93%E4%BD%BF%E7%94%A8/" title="PIL库使用">PIL库使用</a><time datetime="2021-05-29T16:00:00.000Z" title="发表于 2021-05-30 00:00:00">2021-05-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/05/24/%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2/" title="信息泄露"><img src="http://eeknight.top/img/64.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="信息泄露"/></a><div class="content"><a class="title" href="/2021/05/24/%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2/" title="信息泄露">信息泄露</a><time datetime="2021-05-24T14:14:57.871Z" title="发表于 2021-05-24 22:14:57">2021-05-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/05/23/2021%E7%9C%81%E8%B5%9B/" title="2021省赛wp"><img src="http://eeknight.top/img/61.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2021省赛wp"/></a><div class="content"><a class="title" href="/2021/05/23/2021%E7%9C%81%E8%B5%9B/" title="2021省赛wp">2021省赛wp</a><time datetime="2021-05-23T13:46:01.505Z" title="发表于 2021-05-23 21:46:01">2021-05-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/05/23/2021%E5%9B%BD%E8%B5%9Bwp/" title="2021国赛wp"><img src="http://eeknight.top/img/22.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2021国赛wp"/></a><div class="content"><a class="title" href="/2021/05/23/2021%E5%9B%BD%E8%B5%9Bwp/" title="2021国赛wp">2021国赛wp</a><time datetime="2021-05-23T13:46:01.502Z" title="发表于 2021-05-23 21:46:01">2021-05-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/05/08/SSTI/" title="SSTI"><img src="http://eeknight.top/img/12.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SSTI"/></a><div class="content"><a class="title" href="/2021/05/08/SSTI/" title="SSTI">SSTI</a><time datetime="2021-05-07T16:00:00.000Z" title="发表于 2021-05-08 00:00:00">2021-05-08</time></div></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/ee7.png)"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By eeknight</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script></div></body></html>
